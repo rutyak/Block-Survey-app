@@ -1,0 +1,9 @@
+.questions-add .submit-btn button{
+    width: 30%;
+    border: 1px solid gray;
+    border-radius: 0.5rem;
+    height: 2rem;
+    background-color: black;
+    color: aqua;
+    margin-top: 1rem;
+}

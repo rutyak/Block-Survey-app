@@ -1,0 +1,38 @@
+.container{
+    width: 9%;
+    height: 100%;
+}
+
+.container h1{
+    padding: 0.3rem;
+    width: 100%;
+    color: burlywood;
+    font-size: 1.8rem;
+}
+
+.nav{
+    width: 38%;
+    height: 93%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem;
+    gap: 1.3rem;
+    border: 1px solid gray;
+    border-radius: 1rem;
+    background: cyan;
+    padding-top: 1.5rem;
+    margin-top: 1%;
+}
+
+.nav .icon{
+    font-size: 2rem;
+}
+
+.nav .analytics{
+    width: 2rem;
+}
+
+.nav .users{
+    margin-bottom: 7rem;
+}

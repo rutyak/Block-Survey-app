@@ -1,0 +1,26 @@
+.entryBtn{
+    width: 16%;
+    height: 2rem;
+    border: 1px solid gray;
+    border-radius: 0.5rem;
+    background: black;
+    color: #abb0f6;
+    margin-top: 0.6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.entry-btn-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.entryBtn img{
+    width: 1.5rem;
+}

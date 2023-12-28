@@ -1,0 +1,118 @@
+.formContainer{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container{
+    text-align: center;
+    margin-top: 2rem;
+    height: 96%;
+    width: 100%;
+}
+
+.form-container h2{
+    margin-bottom: 1rem;
+}
+
+.form{
+    width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    border: 1px solid gray;
+    border-radius: 1.3rem;
+    margin: auto;
+    padding: 1.2rem;
+    background: aliceblue;
+}
+
+.form form{
+    width: 80%;
+}
+
+.form .add-que{
+    width: 1.5rem;
+    margin-left: 1rem;
+    margin-bottom: 1.2rem;
+}
+
+
+.form .title{
+    margin-left: 2.8rem;
+}
+
+.form p{
+    margin-top: 0.8rem;
+    color: crimson;
+}
+
+.form-form h2{
+    font-size: larger;
+}
+
+input{
+    width: 80%;
+    border: 1px solid gray;
+    border-radius: 0.4rem;
+    margin-bottom: 0.5rem;
+    padding: 0.3rem;
+}
+
+.questions-btn{
+    width: 44%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+.questions-btn img{
+   width: 1.5rem;
+}
+
+.questions-btn button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.3rem;
+    border: 1px solid gray;
+    border-radius: 0.5rem;
+    background-color: #536e6c;
+}
+
+.questions-add{
+    width: 45%;
+    margin: auto;
+    overflow: auto;
+    height: 52%;
+}
+
+.questions-add .surveyQue{
+    opacity: 0.3;
+    height: 2rem;
+    padding: 0.8rem;
+    width: 98%;
+    margin-top: 1.3rem;
+}
+
+.radio-check-opacity{
+    opacity: 0.3;
+}
+
+.input-radio-check{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.radio-check-width{
+    width: 3rem;
+}
+
