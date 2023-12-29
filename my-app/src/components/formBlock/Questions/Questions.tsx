@@ -1,8 +1,8 @@
 import { useDispatch } from 'react-redux';
 import { formSurvey } from '../../../Slice/formSlice';
-import { imageSurvey } from '../../../Slice/imageSlice';
 import './Questions.css'
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 type entryTypes = {
     que: any,
@@ -16,17 +16,36 @@ const Questions = (({ que, setQue, heading}: entryTypes) => {
     let count = que.addQue.length + que.addSingle.length + que.addMulti.length;
     console.log(count);
 
-    function handleFormSubmit(){
+    async function handleFormSubmit(){
         try {
         console.log("HandleSubmit Click");
         const formInfo = [
-           {titleDesc: heading},
+           {title: heading.title},
+           {desc: heading.desc},
            {questions: que}
         ]
-        dispatch(formSurvey(formInfo))
-        toast.success("Survey uploaded successfully!!")
-        } catch (error) {
+
+        const postForm ={
+            title: heading.title,
+            desc: heading.desc,
+            que: que.addQue,
+            radioQue: que.addSingle,
+            checkboxQue: que.addMulti
+        }
+        console.log(postForm);
+        try {
+            const res = await axios.post('http://localhost:5000/forms',postForm)
+            
+            console.log(res.data);
+            toast.success("Survey uploaded successfully!!")
+          } catch (error) {
+            console.log(error);
             toast.error("Uploding fail")
+          }
+
+        dispatch(formSurvey(formInfo))
+        } catch (error) {
+            console.log(error)
         }
     }
 

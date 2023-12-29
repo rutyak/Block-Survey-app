@@ -5,6 +5,7 @@ import Navbar from '../Navbar/Navbar';
 import { useDispatch } from 'react-redux';
 import { clearSurvey, videoSurvey } from '../../Slice/videoSlice';
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const Video = () => {
   
@@ -31,17 +32,34 @@ const Video = () => {
     setBtn({ ...btn, addVideoSurvey: true, createBtn: false});
   }
 
-  function handelSubmit(){
+  async function handelSubmit(){
     try {
       const videoAllInfo = [
-        {titleDesc: titleDesc},
+        {title: titleDesc.title},
+        {desc: titleDesc.desc},
         {url: URL.createObjectURL(videoSrc)}
       ]
       console.log(videoAllInfo);
+
+      const post = {
+        title: titleDesc.title,
+        desc: titleDesc.desc,
+        url: URL.createObjectURL(videoSrc)
+      }
+      console.log("post",post)
+      try {
+        const res = await axios.post('http://localhost:5000/videos',post)
+        console.log(res.data);
+        toast.success("Survey uploaded successfully!!")
+      } catch (error) {
+        console.log(error);
+        toast.error("Uploding fail")
+      }
+
       dispatch(videoSurvey(videoAllInfo));
-      toast.success("Survey uploaded successfully!!")
+     
     } catch (error) {
-      toast.error("Uploding fail")
+      console.log(error);
     }
   }
   

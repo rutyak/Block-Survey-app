@@ -24,7 +24,7 @@ const Form = () => {
 
   const [heading, setHeading] = useState<any>({
     title: '',
-    describe: ''
+    desc: ''
   })
 
   let count = que.addQue.length + que.addSingle.length + que.addMulti.length;
