@@ -34,6 +34,23 @@ const Video = () => {
 
   async function handelSubmit(){
     try {
+
+    //  try {
+    //   const formData = new FormData();
+    //   formData.append('video',videoSrc);
+
+    //   const resResult = await axios.post(
+    //     'http://localhost:5000/upload-video',
+    //     formData,
+    //     {
+    //       headers: {"Content-Type": "multipart/form-data"},
+    //     }
+    //     )
+    //   console.log(resResult);
+    //  } catch (error) {
+    //   console.log(error)
+    //  }
+
       const videoAllInfo = [
         {title: titleDesc.title},
         {desc: titleDesc.desc},

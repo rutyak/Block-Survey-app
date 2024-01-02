@@ -1,162 +1,89 @@
-import { useDispatch } from 'react-redux';
-import { formSurvey } from '../../../Slice/formSlice';
-import './Questions.css'
-import { toast } from 'react-toastify';
-import axios from 'axios';
+import { useDispatch } from "react-redux";
+import { formSurvey } from "../../../Slice/formSlice";
+import "./Questions.css";
+import { toast } from "react-toastify";
+import axios from "axios";
+
 
 type entryTypes = {
-    que: any,
-    setQue: any,
-    heading: any
+  questions: any;
+  heading: any;
+  handleQuestions: any
 };
 
-const Questions = (({ que, setQue, heading}: entryTypes) => {
-    
-    const dispatch = useDispatch();
-    let count = que.addQue.length + que.addSingle.length + que.addMulti.length;
-    console.log(count);
-
-    async function handleFormSubmit(){
-        try {
+const Questions = ({ questions, heading, handleQuestions }: entryTypes) => {
+  const dispatch = useDispatch();
+    async function handleFormSubmit() {
+      try {
         console.log("HandleSubmit Click");
         const formInfo = [
-           {title: heading.title},
-           {desc: heading.desc},
-           {questions: que}
-        ]
+          { title: heading.title },
+          { desc: heading.desc },
+          { questions: questions },
+        ];
 
-        const postForm ={
-            title: heading.title,
-            desc: heading.desc,
-            que: que.addQue,
-            radioQue: que.addSingle,
-            checkboxQue: que.addMulti
-        }
+        const postForm = {
+          title: heading.title,
+          desc: heading.desc,
+          questions: questions
+        };
         console.log(postForm);
         try {
-            const res = await axios.post('http://localhost:5000/forms',postForm)
-            
+          const res = await axios.post("http://localhost:5000/forms", postForm);
+          if (res.status === 200) {
             console.log(res.data);
-            toast.success("Survey uploaded successfully!!")
-          } catch (error) {
-            console.log(error);
-            toast.error("Uploding fail")
+            toast.success("Survey uploaded successfully!!");
           }
-
-        dispatch(formSurvey(formInfo))
         } catch (error) {
-            console.log(error)
+          console.log(error);
+          toast.error("Uploding fail");
         }
+
+        dispatch(formSurvey(formInfo));
+      } catch (error) {
+        console.log(error);
+      }
     }
+  let no = -1;
+  return (
+    <div className="questions">
+      {
+        questions?.map((question: any, index: number) => {
 
-    return (
-        <div className="questions-add">
-            {que.addQue.length > 0 &&
-                que.addQue.map((singleQueue: any, index: number) => {
-                    return (
-                        <div key={index}>
-                            <input
-                                type="text"
-                                className="input question surveyQue"
-                                placeholder="Enter your question?"
-                                value={singleQueue || ""} //read time update
-                                onChange={(e) => {
-                                    const _queue = [...que.addQue]; //taking copy of addQue array
-                                    _queue[index] = e.target.value; // update the value of input
-                                    setQue({ ...que, addQue: [..._queue] }); // adding into que
-                                }}
-                            />
-                        </div>
-                    );
-                })}
-            {que.addSingle.length > 0 &&
-                que.addSingle.map((radio: any, index: number) => {
-                    return (
-                        <div key={index}>
-                            <input
-                                type="text"
-                                className="input mcq surveyQue"
-                                placeholder="Enter your mcq question?"
-                                value={radio || ""}
-                                onChange={(e) => {
-                                    const mcq = [...que.addSingle];
-                                    mcq[index] = e.target.value;
-                                    setQue({ ...que, addSingle: [...mcq] });
-                                }
-                                }
-                            />
-                            <div>
-                                <div className="input-radio-check">
-                                    <input type="radio" className="radio-check-width" />
-                                    <input
-                                        type="text"
-                                        className="radio-check-opacity"
-                                        placeholder="Option 1"
-                                    />
-                                </div>
-                                <div className="input-radio-check">
-                                    <input type="radio" className="radio-check-width" />
-                                    <input
-                                        type="text"
-                                        className="radio-check-opacity"
-                                        placeholder="Option 2"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    )
+          no++;
+          console.log(no);
+
+          return (
+            <div>
+              { question.type &&
+               <div className="numbering"><b>{no}</b><input type="text" placeholder="Enter your question?" onChange={(e) => handleQuestions(e, index)} /></div> 
+              }
+              {
+                question?.options?.map((option: string[], optionIndex: number) => {
+                  return (
+                    <div className="radio-check">
+                     {question.type === 'radio'? (
+                      <input className="radio-check-width" type="radio" placeholder="Option 1"/>
+                      ):(
+                      <input className="radio-check-width" type="checkbox" placeholder="Option 2"/>
+                      )}
+                      <input  type="text" placeholder="Enter your question?" onChange={(e) => handleQuestions(e, index, optionIndex)}/>
+                    </div>
+                  )
                 })
-            }
+              }
+            </div>
 
-            {que.addMulti.length > 0 &&
-                que.addMulti.map((check: any, index: number) => {
-                    return (
-                        <div key={index}>
-                            <input
-                                type="text"
-                                className="input checkQue surveyQue"
-                                placeholder="Enter your checkbox question?"
-                                value={check || ""}
-                                onChange={(e) => {
-                                    const _check = [...que.addMulti]
-                                    _check[index] = e.target.value
-                                    setQue({ ...que, addMulti: [..._check] })
-                                }}
-                            />
+          )
+        })
+      }
 
-                            <div>
-                                <div className="input-radio-check">
-                                    <input type="checkbox" className="radio-check-width" />
-                                    <input
-                                        type="text"
-                                        className="radio-check-opacity"
-                                        placeholder="Option 1"
-                                    />
-                                </div>
-                                <div className="input-radio-check">
-                                    <input type="checkbox" className="radio-check-width" />
-                                    <input
-                                        type="text"
-                                        className="radio-check-opacity"
-                                        placeholder="Option 2"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    )
-                })
-            }
+      {
+        questions.length === 6 && 
+        <button className="submit-btn" onClick={handleFormSubmit}>Submit</button>
+      }
+    </div>
+  );
+};
 
-            {count === 5 && 
-                <div className="submit-btn">
-                    <button onClick={handleFormSubmit}>
-                        Submit
-                    </button>
-                </div>
-            }
-
-        </div>
-    )
-})
-
-export default Questions
+export default Questions;

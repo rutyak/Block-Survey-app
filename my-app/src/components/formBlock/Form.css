@@ -87,32 +87,6 @@ input{
     background-color: #536e6c;
 }
 
-.questions-add{
-    width: 45%;
-    margin: auto;
-    overflow: auto;
-    height: 52%;
+.formBlock h2, .videoBlock h2, .imageBlock h2{
+    font-size: larger;
 }
-
-.questions-add .surveyQue{
-    opacity: 0.3;
-    height: 2rem;
-    padding: 0.8rem;
-    width: 98%;
-    margin-top: 1.3rem;
-}
-
-.radio-check-opacity{
-    opacity: 0.3;
-}
-
-.input-radio-check{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.radio-check-width{
-    width: 3rem;
-}
-

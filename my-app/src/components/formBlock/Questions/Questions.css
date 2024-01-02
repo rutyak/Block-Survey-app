@@ -1,4 +1,4 @@
-.questions-add .submit-btn button{
+.submit-btn{
     width: 30%;
     border: 1px solid gray;
     border-radius: 0.5rem;
@@ -6,4 +6,34 @@
     background-color: black;
     color: aqua;
     margin-top: 1rem;
+}
+
+.questions{
+    width: 45%;
+    height: 60%;
+    margin: auto;
+    overflow: auto;
+}
+
+.questions .radio-check{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.radio-check .radio-check-width{
+    width: 3rem;
+}
+
+.questions input{
+    width: 99%;
+    margin-top: 0.55rem;
+    opacity: 0.7;
+} 
+
+.numbering{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 }

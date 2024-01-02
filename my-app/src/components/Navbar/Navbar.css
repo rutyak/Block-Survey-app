@@ -6,13 +6,15 @@
 .container h1{
     padding: 0.3rem;
     width: 100%;
-    color: burlywood;
+    color: #a66a1d;
     font-size: 1.8rem;
+    font-size: 2.2rem;
+    font-family: fangsong;
 }
 
 .nav{
-    width: 38%;
-    height: 93%;
+    width: 39%;
+    height: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;

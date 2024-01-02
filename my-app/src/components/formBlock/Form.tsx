@@ -8,7 +8,12 @@ import Navbar from "../Navbar/Navbar";
 
 const Form = () => {
 
-  const [btn, setBtn] = useState<any>(
+  type btnType={
+    addBtn: boolean,
+    addSurvey: boolean,
+    removeAddSurvey: boolean
+  }
+  const [btn, setBtn] = useState<btnType>(
     {
       addBtn: false,
       addSurvey: false,
@@ -16,20 +21,21 @@ const Form = () => {
     }
   )
 
-  const [que, setQue] = useState<any>({
-    addQue: [],
-    addSingle: [],
-    addMulti:[]
-  })
+  type typeObj ={
+    type: string,
+    question: string,
+    options: string[]
+  }
+  const [questions, setQuestions] = useState<typeObj[]>([{ type:'', question: '', options: []}]);
 
-  const [heading, setHeading] = useState<any>({
+  type headingType={
+    title: string,
+    desc: string
+  }
+  const [heading, setHeading] = useState<headingType>({
     title: '',
     desc: ''
   })
-
-  let count = que.addQue.length + que.addSingle.length + que.addMulti.length;
-  console.log(count);
-
 
   function handleAdd(e: any) {
     setBtn({ ...btn, addBtn: true });
@@ -39,34 +45,29 @@ const Form = () => {
     setBtn({ ...btn,addSurvey: true, removeAddSurvey: false});
   }
 
-  function handleQue() {
-    setQue({
-      ...que,
-      addQue:[...que.addQue, ""]
-    });
+  function handleQuestions(e: React.ChangeEvent<HTMLInputElement>, index: number, optionIndex: number){
+    
+    const que = [...questions]; // que is object
+    const object = que[index]; // creating index in array
+    if(optionIndex >= 0){
+      object.options[optionIndex] = e.target.value;
+    }
+    else{
+      object.question = e.target.value;
+    }
+  }
+  console.clear()
+  console.log(...questions);
+
+  const addQuestion = (type : string)=>{
+    const options = (type !== 'single') ? ['',''] : []
+    setQuestions([
+      ...questions,
+      { type : type, question:'', options: options}
+    ])
     setBtn({ ...btn, addBtn: false });
   }
 
-  function handleMcqQue() {
-    setQue({
-      ...que,
-      addSingle:[...que.addSingle, ""]
-    });
-
-    setBtn({ ...btn, addBtn: false });
-  }
-
-  function handleCheckQue() {
-    setQue({
-      ...que,
-      addMulti: [...que.addMulti, ""]
-    });
-
-    setBtn({ ...btn, addBtn: false });
-  }
-
-
-  console.log(que);
   return (
     <div className="formContainer">
       <Navbar/>
@@ -99,17 +100,17 @@ const Form = () => {
                 <input
                   type="text"
                   className="input desc"
-                  value={heading.describe}
+                  value={heading.desc}
                   onChange={(e) => setHeading({
                     ...heading,
-                    describe: e.target.value
+                    desc: e.target.value
                   })}
                   placeholder="Add description"
                 />
               </label>
               <p>Add at least 5 questions</p>
             </form>
-            {heading.title !== "" && heading.describe !== "" && count!==5 && (
+            {heading.title !== "" && heading.desc !== "" && (
               <div>
                 <img
                   className="add-que"
@@ -122,15 +123,15 @@ const Form = () => {
           </div>
           { btn.addBtn && (
             <div className="questions-btn">
-              <button onClick={handleQue}>
+              <button onClick={()=> addQuestion('single')}>
                 <p>Add question</p>
                 <img src={plusSign} alt="addQue icon" />
               </button>
-              <button onClick={handleMcqQue}>
+              <button onClick={()=> addQuestion('radio')}>
                 <p>Add multi choice question</p>
                 <img src={plusSign} alt="addQue icon" />
               </button>
-              <button onClick={handleCheckQue}>
+              <button onClick={()=> addQuestion('checkbox')}>
                 <p>Add checkbox question</p>
                 <img src={plusSign} alt="addQue icon" />
               </button>
@@ -139,10 +140,10 @@ const Form = () => {
         </div>
       )}
       
-      <Questions que={que} setQue={setQue} heading={heading}/>
+      <Questions questions={questions} heading={heading} handleQuestions={handleQuestions}/>
       </div>
     </div>
   );
-};
+}
 
 export default Form;

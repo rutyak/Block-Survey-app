@@ -5,12 +5,14 @@ import Navbar from "../Navbar/Navbar"
 import './Image.css'
 import { useDispatch } from 'react-redux'
 import { imageSurvey } from '../../Slice/imageSlice'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 
 const Image = () => {
 
     const dispatch = useDispatch();
-    const [img, setImg] = useState<any>([''])
+    const [img, setImg] = useState<any>([])
     const [display, setDisplay] = useState<any>(true);
 
     const [btn, setBtn] = useState<any>(
@@ -42,14 +44,38 @@ const Image = () => {
         }
     }
     
-    function handleImgSubmit(){
-         console.log("HandleSubmit Click");
+    async function handleImgSubmit(){
+         try {
+            console.log("HandleSubmit Click");
          const imageInfo = [
-            {titleDesc: titDesc},
+            {title: titDesc.title},
+            {desc: titDesc.desc},
             {imageUrls: img}
          ]
 
+         const postImg = {
+            title: titDesc.title,
+            desc: titDesc.desc,
+            imageUrls: img
+         }
+         
+         try {
+            const res = await axios.post('http://localhost:5000/images', postImg);
+            if(res.status===200){
+                console.log("imgSurveyData: ",res.data);
+                toast.success("Survey uploaded successfully!!")
+            }
+         }
+          catch (error) {
+            console.log(error);
+            toast.error("Uploding fail")
+         }
+         
          dispatch(imageSurvey(imageInfo))
+         } 
+         catch (error) {
+            console.log(error);
+         }
     }
     
     return  (
