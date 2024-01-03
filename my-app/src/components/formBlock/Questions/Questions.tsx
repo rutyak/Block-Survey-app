@@ -45,6 +45,7 @@ const Questions = ({ questions, heading, handleQuestions }: entryTypes) => {
       }
     }
   let no = -1;
+  
   return (
     <div className="questions">
       {

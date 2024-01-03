@@ -12,8 +12,8 @@ import { toast } from 'react-toastify'
 const Image = () => {
 
     const dispatch = useDispatch();
-    const [img, setImg] = useState<any>([])
-    const [display, setDisplay] = useState<any>(true);
+    const [img, setImg] = useState<string[]>([])
+    const [display, setDisplay] = useState<boolean>(true);
 
     const [btn, setBtn] = useState<any>(
         {

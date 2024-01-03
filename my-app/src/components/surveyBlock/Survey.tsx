@@ -4,117 +4,52 @@ import DrawerExample from '../Drawer/DrawerExample'
 import { useSelector } from 'react-redux'
 
 const Survey = () => {
-  
-  const video = useSelector((state: any)=> state.video.videoInfo);
-  console.log("Video: ", video);
-  const image = useSelector((state: any)=>state.image.imageInfo);
-  console.log(image);
-  const form = useSelector((state: any)=>state.form.formInfo);
-  console.log(form);
-  
+
+  const videos = useSelector((state: any) => state.video.videoInfo);
+  console.log("Video: ", videos);
+  const images = useSelector((state: any) => state.image.imageInfo);
+  console.log(images);
+  const forms = useSelector((state: any) => state.form.formInfo);
+  console.log(forms);
+
+
+
   return (
     <div className='surveyContainer'>
-      <Navbar/>
+      <Navbar />
       <div className='survey-container'>
-         <div className='formBlock'>
-         <h2>Forms</h2>
-          <div className='formSurvey'>
-            <p>This is Form blocks this containes more texts <DrawerExample/> </p>
-            <p>This is Form blocks <DrawerExample/></p>
-            <p>This is Form blocks <DrawerExample/></p>
-            <p>This is Form blocks <DrawerExample/></p>
-            <p>This is Form blocks <DrawerExample/></p>
-            <p>This is Form blocks <DrawerExample/></p>
-            <p>This is Form blocks this containes more texts <DrawerExample/> </p>
-            <p>This is Form blocks <DrawerExample/></p>
-            <p>This is Form blocks <DrawerExample/></p>
-            <p>This is Form blocks <DrawerExample/></p>
-            <p>This is Form blocks <DrawerExample/></p>
-            <p>This is Form blocks <DrawerExample/></p> 
+        <div className='formBlock'>
+          <h2>Forms</h2>
+          <div className="fBlock">
+            {forms?.map((ele: any, i: number) => (
+              <div className='formSurvey'>
+                <p>{forms[i][0].title}<DrawerExample data={forms[i]}/> </p>
+              </div>
+            ))
+            }
           </div>
-         </div>
-         <div className='videoBlock'>
+        </div>
+        <div className='videoBlock'>
           <h2>Videos</h2>
-          <div className='videoSurvey'>
-            <p>this is video block <DrawerExample/></p>
-            <p>this is video block <DrawerExample/></p>
-
-            <p>this is video block <DrawerExample/></p>
-            <p>this is video block <DrawerExample/></p>
-            <p>this is video block <DrawerExample/></p>
-            <p>this is video block <DrawerExample/></p>
-            <p>this is video block <DrawerExample/></p>
-            <p>this is video block <DrawerExample/></p>
-            <p>this is video block <DrawerExample/></p>
-            <p>this is video block <DrawerExample/></p>
-
-            <p>this is video block <DrawerExample/></p>
-            <p>this is video block <DrawerExample/></p>
-            
-
-            <p>this is video block <DrawerExample/></p>
-            <p>this is video block <DrawerExample/></p>
-            <p>this is video block <DrawerExample/></p>
-            <p>this is video block <DrawerExample/></p>
-            <p>this is video block <DrawerExample/></p>
-            <p>this is video block <DrawerExample/></p>
-            <p>this is video block <DrawerExample/></p>
-
-            <p>this is video block <DrawerExample/></p>
-            <p>this is video block <DrawerExample/></p>
-      
-            <p>this is video block <DrawerExample/></p>
-            <p>this is video block <DrawerExample/></p>
-            <p>this is video block <DrawerExample/></p>
-            <p>this is video block <DrawerExample/></p>
-            <p>this is video block <DrawerExample/></p>
-            <p>this is video block <DrawerExample/></p>
-            <p>this is video block <DrawerExample/></p>
-            
+          <div className="vBlock">
+            {videos?.map((ele: any, i: number) => (
+              <div className='videoSurvey'>
+                <p>{videos[i][0].title}<DrawerExample data={videos[i]}/></p>
+              </div>
+            ))}
           </div>
-         </div>
-         <div className='imageBlock'>
-           <h2>Images</h2>
-           <div className='imgSurvey'>
-            <p>this is image block <DrawerExample/></p>
-            <p>this is image block <DrawerExample/></p>
-            <p>this is image block <DrawerExample/></p>
-            <p>this is image block <DrawerExample/></p>
 
-            <p>this is image block <DrawerExample/></p>
-            <p>this is image block <DrawerExample/></p>
-            <p>this is image block <DrawerExample/></p>
-            <p>this is image block <DrawerExample/></p>
-
-
-            <p>this is image block <DrawerExample/></p>
-            <p>this is image block <DrawerExample/></p>
-            <p>this is image block <DrawerExample/></p>
-            <p>this is image block <DrawerExample/></p>
-
-
-            <p>this is image block <DrawerExample/></p>
-            <p>this is image block <DrawerExample/></p>
-            <p>this is image block <DrawerExample/></p>
-            <p>this is image block <DrawerExample/></p>
-
-            <p>this is image block <DrawerExample/></p>
-            <p>this is image block <DrawerExample/></p>
-            <p>this is image block <DrawerExample/></p>
-            <p>this is image block <DrawerExample/></p>
-
-            <p>this is image block <DrawerExample/></p>
-            <p>this is image block <DrawerExample/></p>
-            <p>this is image block <DrawerExample/></p>
-            <p>this is image block <DrawerExample/></p>
-
-            <p>this is image block <DrawerExample/></p>
-            <p>this is image block <DrawerExample/></p>
-            <p>this is image block <DrawerExample/></p>
-            <p>this is image block <DrawerExample/></p>
-
-           </div>
-         </div>
+        </div>
+        <div className='imageBlock'>
+          <h2>Images</h2>
+          <div className="iBlock">
+            {images?.map((ele: any, i: number) => (
+              <div className='imgSurvey'>
+                <p>{images[i][0].title}<DrawerExample data={images[i]}/></p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   )
