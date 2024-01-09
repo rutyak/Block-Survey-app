@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { formSurvey } from "../../../Slice/formSlice";
+import { clearFormSurvey, formSurvey } from "../../../Slice/formSlice";
 import "./Questions.css";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -17,12 +17,14 @@ const Questions = ({ questions, heading, handleQuestions }: entryTypes) => {
       try {
         console.log("HandleSubmit Click");
         const formInfo = [
+          { type: 'Survey'},
           { title: heading.title },
           { desc: heading.desc },
           { questions: questions },
         ];
 
         const postForm = {
+          type: 'Survey',
           title: heading.title,
           desc: heading.desc,
           questions: questions
@@ -40,6 +42,8 @@ const Questions = ({ questions, heading, handleQuestions }: entryTypes) => {
         }
 
         dispatch(formSurvey(formInfo));
+        // dispatch(clearFormSurvey());
+
       } catch (error) {
         console.log(error);
       }

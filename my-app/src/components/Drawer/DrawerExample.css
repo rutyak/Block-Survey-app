@@ -33,3 +33,9 @@
     display: flex;
     justify-content: space-between;
 }
+
+.image-drawer img{
+   width: 3rem;
+   border: 1px solid gray;
+   border-radius: 0.7rem;
+}

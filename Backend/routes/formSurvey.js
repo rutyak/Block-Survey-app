@@ -5,9 +5,10 @@ const router = express.Router();
 router.post('/forms',async (req, res)=>{
 
    try {
-      const {title, desc, questions} = req.body;
+      const {type, title, desc, questions} = req.body;
  
       const newForm = new forms({
+         type,
          title,
          desc,
          questions

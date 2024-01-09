@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Entry from '../Entry/Entry';
 import './Video.css'
 import Navbar from '../Navbar/Navbar';
@@ -24,7 +24,7 @@ const Video = () => {
   });
   console.log(titleDesc);
 
-  const [videoSrc, setVideoSrc] = useState<any>(null)
+  const [file, setFile] = useState<any>()
   const [type, setType] = useState<any>('')
   const [disable, setDisable] = useState<any>(true);
 
@@ -36,22 +36,23 @@ const Video = () => {
     try {
 
       const videoAllInfo = [
+        {type: "Video"},
         {title: titleDesc.title},
         {desc: titleDesc.desc},
-        {url: videoSrc},
+        {url: URL.createObjectURL(file)},
         {videotype: type}
       ]
       console.log(videoAllInfo);
 
-      const post = {
-        title: titleDesc.title,
-        desc: titleDesc.desc,
-        url: URL.createObjectURL(videoSrc),
-        type: type
-      }
-      console.log("post",post)
+      const formData = new FormData();
+      formData.append('file',file);
+      formData.append('title',titleDesc.title);
+      formData.append('desc',titleDesc.desc);
+      formData.append('type',"Video");
+      console.log("formData: ",formData);
+      
       try {
-        const res = await axios.post('http://localhost:5000/videos',post)
+        const res = await axios.post('http://localhost:5000/videos/upload',formData)
         console.log(res.data);
         toast.success("Survey uploaded successfully!!")
       } catch (error) {
@@ -60,13 +61,16 @@ const Video = () => {
       }
 
       dispatch(videoSurvey(videoAllInfo));
-      dispatch(clearSurvey());
+      // dispatch(clearSurvey());
       
     } catch (error) {
       console.log(error);
     }
   }
-  
+  // useEffect(()=>{
+  //   handelSubmit()
+  // },[])
+
   return ( 
     <div className='videoContainer'>
       <Navbar/>
@@ -91,20 +95,21 @@ const Video = () => {
            /><br />
           
            <label htmlFor="upload">Upload video:</label><br />
-           {videoSrc &&
+           {file &&
               <video width="320" height="240" controls>
-                 <source src={URL.createObjectURL(videoSrc)} type={`video/${type}`} />
+                 <source src={URL.createObjectURL(file)} type={`video/${type}`} />
               </video>
            }
        {  disable &&
         <input 
            type='file'
            accept="video/*"
+           name='videoFile'
            onChange={(e:any)=>{
             const files = e.target.files
             if(files && files.length > 0){
               console.log(files[0]);
-              setVideoSrc(files[0]);
+              setFile(files[0]);
               let arr = (files[0].name).split('.');
               console.log(arr[1]);
               setType(arr[1]);

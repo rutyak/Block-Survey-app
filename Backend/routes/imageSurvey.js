@@ -1,22 +1,42 @@
 const express = require('express');
 const { images } = require('../model/image');
+const upload = require('../middleware/multer');
 const router = express.Router()
 
-router.post('/images', async(req,res)=>{
-    try {
-        const {title, desc, imageUrls} = req.body;
+router.post('/images',upload.array('files'), async(req,res)=>{
 
-        const newImages = new images({
-              title,
-              desc,
-              imgUrl: imageUrls
-        })
+    cloudinary.uploader.upload(req.file.path,{resource_type: 'auto', folder: 'Images'}, async function(err, result){
+        try {
+         if(err){
+           console.log(err);
+           return res.status(500).json({
+             success: false,
+             message: "Error"
+           })
+         }
+         else{
+          console.log("Uploded Successfully!!");
+          try {
+            const {type, title, desc} = req.body;
+            const imageFile = result.url;
     
-        await newImages.save();
-        res.status(200).json({data: newImages})
-    } catch (error) {
-        console.log(error)
-    }
+            const newImages = new images({
+                  type,
+                  title,
+                  desc,
+                  imageFile
+            })
+        
+            await newImages.save();
+            res.status(200).json({data: newImages})
+        } catch (error) {
+            console.log(error)
+        }
+         }
+        } catch (error) {
+         console.log(error)
+        }
+     })
 })
 
 module.exports = router

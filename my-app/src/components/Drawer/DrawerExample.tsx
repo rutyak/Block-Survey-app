@@ -9,7 +9,6 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 import './DrawerExample.css'
-import { error } from 'console'
 
 type typeObj = {
   data: any
@@ -39,19 +38,28 @@ export default function DrawerExample({ data }: typeObj) {
             <div className='drawer-main'>
               <div className='title-desc'>
                 <div className='title-drawer'>
-                  <h3>Title<p style={{ marginLeft: "3.2rem" }}>: {data[0].title}</p></h3>
+                  <h3>Title<p style={{ marginLeft: "3.2rem" }}>: {data[1].title}</p></h3>
                 </div>
                 <div className='desc-drawer'>
-                  <h3>Description<p>: {data[1].desc}</p></h3>
+                  <h3>Description<p>: {data[2].desc}</p></h3>
                 </div>
               </div>
-            {/* { data[0].title === 'second video' &&
-              <div className="video-image">
+            { data[0].type === 'Video' &&
+                <div className="video-image">
                 <video width="320" height="240" controls>
-                  <source src={URL.createObjectURL(data[2].url)} type="video/mp4"/>
+                  <source src={data[3].url} type={`video/${data[4].videotype}`}/>
                 </video>
-              </div>
-            } */}
+                </div>
+              
+            }
+
+            { data[0].type === 'Image' &&
+                data[3].imageUrls?.map((ele: any, i: number)=>(
+                  <div className="image-drawer" key={i}>
+                    <img src={ele} alt="img" />
+                  </div>
+                ))
+            }
 
               <div className='publish-analytics-btn'>
                 <Button className='publish'>Publish</Button>

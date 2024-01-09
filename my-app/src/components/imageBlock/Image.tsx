@@ -4,7 +4,7 @@ import '../videoBlock/Video.css'
 import Navbar from "../Navbar/Navbar"
 import './Image.css'
 import { useDispatch } from 'react-redux'
-import { imageSurvey } from '../../Slice/imageSlice'
+import { clearImageSurvey, imageSurvey } from '../../Slice/imageSlice'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
@@ -12,7 +12,7 @@ import { toast } from 'react-toastify'
 const Image = () => {
 
     const dispatch = useDispatch();
-    const [img, setImg] = useState<string[]>([])
+    const [img, setImg] = useState<any>([])
     const [display, setDisplay] = useState<boolean>(true);
 
     const [btn, setBtn] = useState<any>(
@@ -48,19 +48,20 @@ const Image = () => {
          try {
             console.log("HandleSubmit Click");
          const imageInfo = [
+            {type: 'Image'},
             {title: titDesc.title},
             {desc: titDesc.desc},
             {imageUrls: img}
          ]
 
-         const postImg = {
-            title: titDesc.title,
-            desc: titDesc.desc,
-            imageUrls: img
-         }
+         const formData = new FormData();
+         formData.append('files',img);
+         formData.append('title',titDesc.title);
+         formData.append('desc',titDesc.desc);
+         formData.append('type','Image');
          
          try {
-            const res = await axios.post('http://localhost:5000/images', postImg);
+            const res = await axios.post('http://localhost:5000/images', formData);
             if(res.status===200){
                 console.log("imgSurveyData: ",res.data);
                 toast.success("Survey uploaded successfully!!")
@@ -72,6 +73,7 @@ const Image = () => {
          }
          
          dispatch(imageSurvey(imageInfo))
+        //  dispatch(clearImageSurvey())
          } 
          catch (error) {
             console.log(error);
