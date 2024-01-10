@@ -1,42 +1,35 @@
 const express = require('express');
 const { images } = require('../model/image');
 const upload = require('../middleware/multer');
-const router = express.Router()
+const cloudinary = require('../cloudinary');
+const router = express.Router();
 
-router.post('/images',upload.array('files'), async(req,res)=>{
+router.post('/images', upload.array('files'), async (req, res) => {
+  try {
+    let imageFile = []
+    const uploadPromises = req.files.map(async (file) => {
 
-    cloudinary.uploader.upload(req.file.path,{resource_type: 'auto', folder: 'Images'}, async function(err, result){
-        try {
-         if(err){
-           console.log(err);
-           return res.status(500).json({
-             success: false,
-             message: "Error"
-           })
-         }
-         else{
-          console.log("Uploded Successfully!!");
-          try {
-            const {type, title, desc} = req.body;
-            const imageFile = result.url;
-    
-            const newImages = new images({
-                  type,
-                  title,
-                  desc,
-                  imageFile
-            })
-        
-            await newImages.save();
-            res.status(200).json({data: newImages})
-        } catch (error) {
-            console.log(error)
-        }
-         }
-        } catch (error) {
-         console.log(error)
-        }
-     })
-})
+      const result = await cloudinary.uploader.upload(file.path, { resource_type: 'auto', folder: 'Images' });
+      imageFile.push(result.url);
+    });
 
-module.exports = router
+    const uploadedImages = await Promise.all(uploadPromises);
+    console.log("Image uploaded", uploadedImages);
+
+    const { type, title, desc } = req.body;
+    const newImage = new images({
+      type,
+      title,
+      desc,
+      imageFile
+    });
+
+    await newImage.save();
+    res.status(200).json({ data: newImage });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Error uploading and saving images" });
+  }
+});
+
+module.exports = router;

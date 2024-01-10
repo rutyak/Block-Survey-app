@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import Entry from '../Entry/Entry'      
 import '../videoBlock/Video.css'
 import Navbar from "../Navbar/Navbar"
@@ -12,10 +12,15 @@ import { toast } from 'react-toastify'
 const Image = () => {
 
     const dispatch = useDispatch();
-    const [img, setImg] = useState<any>([])
+    const [img, setImg] = useState<File[]>([])
     const [display, setDisplay] = useState<boolean>(true);
 
-    const [btn, setBtn] = useState<any>(
+    interface BtnType{
+        addVideoBtn: boolean,
+        addImageSurvey: boolean,
+        createBtn: boolean
+    }
+    const [btn, setBtn] = useState<BtnType>(
         {
             addVideoBtn: false,
             addImageSurvey: false,
@@ -23,7 +28,11 @@ const Image = () => {
         }
     )
 
-    const [titDesc, setTitDesc] = useState<any>({
+    interface titleDesc{
+        title: string,
+        desc: string
+    }
+    const [titDesc, setTitDesc] = useState<titleDesc>({
         title: '',
         desc: ''
     });
@@ -32,13 +41,12 @@ const Image = () => {
         setBtn({ ...btn, addImageSurvey: true, createBtn: false });
     }
 
-    function handleImg(e:any){
-        setImg([...img, ""]);
+    function handleImg(e: ChangeEvent<HTMLInputElement>){
         let file = e.target.files;
-        // console.log(file);
+    
         if(file && file.length > 0){
             console.log(file[0]);
-            setImg([...img, URL.createObjectURL(file[0])]);
+            setImg([...img, file[0]]);
             console.log(img)
             img.length === 3? setDisplay(false): setDisplay(true);
         }
@@ -54,12 +62,15 @@ const Image = () => {
             {imageUrls: img}
          ]
 
+        //  console.log("images array",img)
          const formData = new FormData();
-         formData.append('files',img);
+         for(let i=0; i<img.length;i++){
+            formData.append('files',img[i])
+         }
          formData.append('title',titDesc.title);
          formData.append('desc',titDesc.desc);
          formData.append('type','Image');
-         
+         console.log("formData: ",formData)
          try {
             const res = await axios.post('http://localhost:5000/images', formData);
             if(res.status===200){
@@ -74,6 +85,8 @@ const Image = () => {
          
          dispatch(imageSurvey(imageInfo))
         //  dispatch(clearImageSurvey())
+         
+         
          } 
          catch (error) {
             console.log(error);
@@ -93,23 +106,23 @@ const Image = () => {
                 <h2>Image Survey Creation</h2>
                 <input type='text' 
                 placeholder='Image title' 
-                onChange={(e:any)=>setTitDesc({...titDesc, title: e.target.value})}
+                onChange={(e:React.ChangeEvent<HTMLInputElement>)=>setTitDesc({...titDesc, title: e.target.value})}
                 />
                 <input 
                 type='text' 
                 placeholder='Description' 
-                onChange={(e:any)=>setTitDesc({...titDesc, desc: e.target.value})}
+                onChange={(e:React.ChangeEvent<HTMLInputElement>)=>setTitDesc({...titDesc, desc: e.target.value})}
                 />
                 <label htmlFor="upload">Upload Image(max 4):</label>
                 <div className='img-container'>
                 { img.length > 0 &&
-                  img.map((ele: any,index: any)=>{
+                  img.map((ele: File,index: any)=>{
                     try {
                        return (
                         <div key={index}>
-                        <img className='survey-img' src={ele} alt="img" />
+                        <img className='survey-img' src={URL.createObjectURL(ele)} alt="img" />
                         <button className='img-remove-btn' onClick={()=>{
-                           setImg(img.filter((ele:any, i:any)=> i!==index))
+                           setImg(img.filter((_, i:number)=> i!==index))
                            setDisplay(true)
                         }}
                         >Remove</button>

@@ -11,26 +11,37 @@ const Video = () => {
   
   const dispatch = useDispatch();
   // const [submitBtn, setSubmitBtn] = useState<any>(false);
-  const [btn, setBtn] = useState<any>(
+  interface BtnType{
+    addVideoBtn: boolean,
+    addVideoSurvey: boolean,
+    createBtn: boolean
+  }
+  const [btn, setBtn] = useState<BtnType>(
     {
       addVideoBtn: false,
       addVideoSurvey: false,
       createBtn: true
     }
   )
-  const [titleDesc, setTitleDesc] = useState<any>({
+
+  interface titleDescType{
+    title: string,
+    desc: string
+  }
+  const [titleDesc, setTitleDesc] = useState<titleDescType>({
     title: '',
     desc: '',
   });
   console.log(titleDesc);
 
-  const [file, setFile] = useState<any>()
-  const [type, setType] = useState<any>('')
-  const [disable, setDisable] = useState<any>(true);
+  const [file, setFile] = useState<any>(null)
+  const [type, setType] = useState<string>('')
+  const [disable, setDisable] = useState<boolean>(true);
 
   function handleSurveyToggle() {
     setBtn({ ...btn, addVideoSurvey: true, createBtn: false});
   }
+  console.log("fileType: ",file);
 
   async function handelSubmit(){
     try {
@@ -39,7 +50,7 @@ const Video = () => {
         {type: "Video"},
         {title: titleDesc.title},
         {desc: titleDesc.desc},
-        {url: URL.createObjectURL(file)},
+        {url: file? URL.createObjectURL(file): ''},
         {videotype: type}
       ]
       console.log(videoAllInfo);
@@ -68,8 +79,8 @@ const Video = () => {
     }
   }
   // useEffect(()=>{
-  //   handelSubmit()
-  // },[])
+  //   dispatch(clearSurvey());
+  // })
 
   return ( 
     <div className='videoContainer'>
@@ -85,13 +96,13 @@ const Video = () => {
            type='text' 
            placeholder='Video title'
            value={titleDesc.title}
-           onChange={(e:any)=>setTitleDesc({...titleDesc, title: e.target.value})}
+           onChange={(e:React.ChangeEvent<HTMLInputElement>)=>setTitleDesc({...titleDesc, title: e.target.value})}
            /><br />
            <input 
            type='text' 
            placeholder='Description'
            value={titleDesc.desc}
-           onChange={(e:any)=>setTitleDesc({...titleDesc, desc: e.target.value})}
+           onChange={(e:React.ChangeEvent<HTMLInputElement>)=>setTitleDesc({...titleDesc, desc: e.target.value})}
            /><br />
           
            <label htmlFor="upload">Upload video:</label><br />
@@ -105,11 +116,12 @@ const Video = () => {
            type='file'
            accept="video/*"
            name='videoFile'
-           onChange={(e:any)=>{
+           onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{
             const files = e.target.files
             if(files && files.length > 0){
               console.log(files[0]);
               setFile(files[0]);
+              
               let arr = (files[0].name).split('.');
               console.log(arr[1]);
               setType(arr[1]);

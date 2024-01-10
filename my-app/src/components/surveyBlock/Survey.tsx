@@ -20,7 +20,7 @@ const Survey = () => {
         <div className='formBlock'>
           <h2>Forms</h2>
           <div className="fBlock">
-            {forms?.map((ele: any, i: number) => (
+            {forms?.map((ele: any[], i: number) => (
               <div className='formSurvey'>
                 <p>{ele[1].title}<DrawerExample data={ele} /> </p>
               </div>
@@ -31,7 +31,7 @@ const Survey = () => {
         <div className='videoBlock'>
           <h2>Videos</h2>
           <div className="vBlock">
-            {videos?.map((ele: any, i: number) => (
+            {videos?.map((ele: any[], i: number) => (
               <div className='videoSurvey'>
                 <p>{ele[1].title}<DrawerExample data={ele} /></p>
               </div>
@@ -42,7 +42,7 @@ const Survey = () => {
         <div className='imageBlock'>
           <h2>Images</h2>
           <div className="iBlock">
-            {images?.map((ele: any, i: number) => (
+            {images?.map((ele: any[], i: number) => (
               <div className='imgSurvey'>
                 <p>{ele[1].title}<DrawerExample data={ele} /></p>
               </div>
