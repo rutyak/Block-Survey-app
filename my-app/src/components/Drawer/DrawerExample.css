@@ -1,0 +1,41 @@
+.drawer-main{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.publish-analytics-btn .publish{
+    margin-right: 2rem;
+    width: auto;
+    background: #369136;
+}
+
+.publish-analytics-btn .analytics{
+    margin-right: 2rem;
+    width: auto;
+    background: #932bbb;
+}
+
+.title-drawer h3, .desc-drawer h3{
+    display: flex;
+    gap: 0.3rem;
+}
+
+.title-drawer{
+    margin-bottom: 0.3rem;
+}
+
+.publish-analytics-btn{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.image-drawer img{
+   width: 3rem;
+   border: 1px solid gray;
+   border-radius: 0.7rem;
+}
