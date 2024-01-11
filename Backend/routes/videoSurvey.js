@@ -18,6 +18,7 @@ router.post('/videos/upload',upload.single('file'), async (req, res)=>{
        desc,
        videoUrl,
        type,
+       videoType,
        stage
     })
  

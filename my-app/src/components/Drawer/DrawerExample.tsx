@@ -9,6 +9,9 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 import './DrawerExample.css'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 type typeObj = {
   data: any
@@ -17,7 +20,26 @@ export default function DrawerExample({ data }: typeObj) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef<any>(null)
   console.log("data", data);
+
+  const navigate = useNavigate();
  
+  async function handlePublish(id: string){
+
+    console.log("id: ",id)
+    switch(data.type){
+      case 'Video':
+        axios.put(`http://localhost:5000/updateVideo/${id}`,{stage:'published'}).then(res => res.status===200 ? toast.success('Published!'):'');
+        break;
+
+      case 'Survey':
+        axios.put(`http://localhost:5000/updateForm/${id}`,{stage:'published'}).then(res => res.status===200 ? toast.success('Published!'):'');
+        break;
+
+      case 'Image':
+        axios.put(`http://localhost:5000/updateImage/${id}`,{stage:'published'}).then(res => res.status===200 ? toast.success('Published!'):'');
+        break;
+    }
+  }
 
   return (
     <>
@@ -47,14 +69,14 @@ export default function DrawerExample({ data }: typeObj) {
             { data.type === 'Video' &&
                 <div className="video-image">
                 <video width="320" height="240" controls>
-                  <source src={data.url} type={`video/${data.videotype}`}/>
+                  <source src={data.videoUrl} type={`video/${data.videoType}`}/>
                 </video>
                 </div>
               
             }
 
             { data.type === 'Image' &&
-                data.imageUrls?.map((ele: any, i: number)=>(
+                data.imageFile?.map((ele: any, i: number)=>(
                   <div className="image-drawer" key={i}>
                     <img src={ele} alt="img" />
                   </div>
@@ -62,8 +84,8 @@ export default function DrawerExample({ data }: typeObj) {
             }
 
               <div className='publish-analytics-btn'>
-                <Button className='publish'>Publish</Button>
-                <Button className='analytics'>Analytics</Button>
+                <Button className='publish' onClick={()=>handlePublish(data._id)}>Publish</Button>
+                <Button className='analytics' onClick={()=>navigate('./analysis')}>Analytics</Button>
               </div>
             </div>
 
