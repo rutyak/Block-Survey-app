@@ -6,6 +6,7 @@ import './Image.css'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+const BaseUrl = 'http://localhost:5000';
 
 
 const Image = () => {
@@ -53,7 +54,7 @@ const Image = () => {
     
     async function handleImgSubmit(){
         try {
-           console.log("HandleSubmit Click");
+          
 
         const formData = new FormData();
         for(let i=0; i<img.length;i++){
@@ -63,11 +64,9 @@ const Image = () => {
         formData.append('desc',titDesc.desc);
         formData.append('type','Image');
         formData.append('stage','');
-        console.log("formData: ",formData)
         try {
-           const res = await axios.post('http://localhost:5000/images', formData);
+           const res = await axios.post(`${BaseUrl}/images`, formData);
            if(res.status===200){
-               console.log("imgSurveyData: ",res.data);
                toast.success("Survey uploaded successfully!!")
            }
         }
@@ -105,7 +104,7 @@ const Image = () => {
                 <label htmlFor="upload">Upload Image(max 4):</label>
                 <div className='img-container'>
                 { img.length > 0 &&
-                  img.map((ele: File,index: any)=>{
+                  img.map((ele: File,index: number)=>{
                     try {
                        return (
                         <div key={index}>

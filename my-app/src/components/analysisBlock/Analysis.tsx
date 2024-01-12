@@ -45,30 +45,7 @@ const Analysis = () => {
             <p>Todays survey</p>
             <p>Todays survey</p>
             <p>Todays survey</p>
-            <p>Todays survey</p>
-
-            <p>Todays survey</p>
-            <p>Todays survey</p>
-            <p>Todays survey</p>
-
-            <p>Todays survey</p>
-            <p>Todays survey</p>
-            <p>Todays survey</p>
-            <p>Todays survey</p>
-
-            <p>Todays survey</p>
-            <p>Todays survey</p>
-            <p>Todays survey</p>
-            <p>Todays survey this box contain more texts it is working but I want something different</p>
-            <p>Todays survey</p>
-            <p>Todays survey</p>
-            <p>Todays survey</p>
-            <p>Todays survey</p>
-            <p>Todays survey</p>
-            <p>Todays survey</p>
-            <p>Todays survey</p>
-            <p>Todays survey</p>
-            <p>Todays survey</p>
+  
 
             <p>Todays survey</p>
             <p>Todays survey</p>

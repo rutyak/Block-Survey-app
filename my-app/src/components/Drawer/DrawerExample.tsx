@@ -12,11 +12,26 @@ import './DrawerExample.css'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+const BaseUrl = 'http://localhost:5000'
 
-type typeObj = {
-  data: any
+type questionType ={
+  options: string[],
+  question: string,
+  type: string
 }
-export default function DrawerExample({ data }: typeObj) {
+
+type dataType ={
+  videoType: any
+  _id: string
+  imageFile: string[]
+  type: string
+  title: string
+  desc: string
+  stage: string
+  videoUrl: string | undefined
+}
+
+export default function DrawerExample({data}: {data:dataType}) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef<any>(null)
   console.log("data", data);
@@ -28,15 +43,15 @@ export default function DrawerExample({ data }: typeObj) {
     console.log("id: ",id)
     switch(data.type){
       case 'Video':
-        axios.put(`http://localhost:5000/updateVideo/${id}`,{stage:'published'}).then(res => res.status===200 ? toast.success('Published!'):'');
+        axios.put(`${BaseUrl}/updateVideo/${id}`,{stage:'published'}).then(res => res.status===200 ? toast.success('Published!'):'');
         break;
 
       case 'Survey':
-        axios.put(`http://localhost:5000/updateForm/${id}`,{stage:'published'}).then(res => res.status===200 ? toast.success('Published!'):'');
+        axios.put(`${BaseUrl}/updateForm/${id}`,{stage:'published'}).then(res => res.status===200 ? toast.success('Published!'):'');
         break;
 
       case 'Image':
-        axios.put(`http://localhost:5000/updateImage/${id}`,{stage:'published'}).then(res => res.status===200 ? toast.success('Published!'):'');
+        axios.put(`${BaseUrl}/updateImage/${id}`,{stage:'published'}).then(res => res.status===200 ? toast.success('Published!'):'');
         break;
     }
   }

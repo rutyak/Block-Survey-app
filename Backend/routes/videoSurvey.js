@@ -10,7 +10,7 @@ router.post('/videos/upload',upload.single('file'), async (req, res)=>{
   const result = await cloudinary.uploader.upload(req.file.path,{resource_type: 'auto', folder: 'Videos'});
 
   try {
-    const {title, desc, type, stage} = req.body;
+    const {title, desc, type, stage, videoType} = req.body;
     const videoUrl = result.url;
  
     const newVideo = new videos({
@@ -18,8 +18,8 @@ router.post('/videos/upload',upload.single('file'), async (req, res)=>{
        desc,
        videoUrl,
        type,
-       videoType,
-       stage
+       stage,
+       videoType
     })
  
     await newVideo.save();

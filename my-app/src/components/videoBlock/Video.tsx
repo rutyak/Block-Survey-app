@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import Entry from '../Entry/Entry';
 import './Video.css'
 import Navbar from '../Navbar/Navbar';
-import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+const BaseUrl = 'http://localhost:5000';
+
 
 const Video = () => {
   
@@ -32,7 +33,7 @@ const Video = () => {
   });
   console.log(titleDesc);
 
-  const [file, setFile] = useState<any>(null)
+  const [file, setFile] = useState<any>()
   const [type, setType] = useState<string>('')
   const [disable, setDisable] = useState<boolean>(true);
 
@@ -43,7 +44,7 @@ const Video = () => {
 
   async function handelSubmit(){
     try {
-
+      console.log("Handle Submit clicked")
       const formData = new FormData();
       formData.append('file',file);
       formData.append('title',titleDesc.title);
@@ -51,11 +52,14 @@ const Video = () => {
       formData.append('type',"Video");
       formData.append('videoType',type);
       formData.append('stage','')
-
+      
+      console.log("FormData: ",formData)
       try {
-        const res = await axios.post('http://localhost:5000/videos/upload',formData)
-        console.log(res.data);
-        toast.success("Survey uploaded successfully!!")
+        const res = await axios.post(`${BaseUrl}/videos/upload`,formData)
+        console.log("videoSurvey: ",res.data);
+        if(res.status===200){
+          toast.success("Survey uploaded successfully!!")
+      }
       } catch (error) {
         console.log(error);
         toast.error("Uploding fail")
@@ -103,12 +107,12 @@ const Video = () => {
            accept="video/*"
            name='videoFile'
            onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{
-            const files = e.target.files
-            if(files && files.length > 0){
-              console.log(files[0]);
-              setFile(files[0]);
+            const file = e.target.files
+            if(file && file.length > 0){
+              console.log(file[0]);
+              setFile(file[0]);
               
-              let arr = (files[0].name).split('.');
+              let arr = (file[0].name).split('.');
               console.log(arr[1]);
               setType(arr[1]);
               setDisable(false);

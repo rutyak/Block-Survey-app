@@ -24,7 +24,7 @@ const Form = () => {
   type typeObj ={
     type: string,
     question: string,
-    options: string[]
+    options: string[] | string[][]
   }
   const [questions, setQuestions] = useState<typeObj[]>([{ type:'', question: '', options: []}]);
 
@@ -45,7 +45,8 @@ const Form = () => {
     setBtn({ ...btn,addSurvey: true, removeAddSurvey: false});
   }
 
-  function handleQuestions(e: React.ChangeEvent<HTMLInputElement>, index: number, optionIndex: number){
+
+  function handleQuestions(e: React.ChangeEvent<HTMLInputElement>, index: any, optionIndex: any){
     
     const que = [...questions]; // que is object
     const object = que[index]; // creating index in array
@@ -57,7 +58,6 @@ const Form = () => {
     }
   }
   console.clear()
-  console.log(...questions);
 
   const addQuestion = (type : string)=>{
     const options = (type !== 'single') ? ['',''] : []

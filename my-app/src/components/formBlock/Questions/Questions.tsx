@@ -2,12 +2,29 @@ import { useDispatch } from "react-redux";
 import "./Questions.css";
 import { toast } from "react-toastify";
 import axios from "axios";
+const BaseUrl = 'http://localhost:5000';
 
+type headingType={
+  title: string,
+  desc: string
+}
+
+type handleQuestions = (
+  e: React.ChangeEvent<HTMLInputElement>,
+  index: number,
+  optionIndex?: number
+) => void;
+
+type typeObj ={
+  type: string,
+  question: string,
+  options: string[] | string[][]
+}
 
 type entryTypes = {
-  questions: any;
-  heading: any;
-  handleQuestions: any
+  questions: typeObj[];
+  heading: headingType;
+  handleQuestions: handleQuestions
 };
 
 const Questions = ({ questions, heading, handleQuestions }: entryTypes) => {
@@ -25,7 +42,7 @@ const Questions = ({ questions, heading, handleQuestions }: entryTypes) => {
         };
         console.log(postForm);
         try {
-          const res = await axios.post("http://localhost:5000/forms", postForm);
+          const res = await axios.post(`${BaseUrl}/forms`, postForm);
           if (res.status === 200) {
             console.log(res.data);
             toast.success("Survey uploaded successfully!!");
@@ -45,7 +62,7 @@ const Questions = ({ questions, heading, handleQuestions }: entryTypes) => {
   return (
     <div className="questions">
       {
-        questions?.map((question: any, index: number) => {
+        questions?.map((question: typeObj, index: number) => {
 
           no++;
           console.log(no);
@@ -56,7 +73,7 @@ const Questions = ({ questions, heading, handleQuestions }: entryTypes) => {
                <div className="numbering"><b>{no}</b><input type="text" placeholder="Enter your question?" onChange={(e) => handleQuestions(e, index)} /></div> 
               }
               {
-                question?.options?.map((option: string[], optionIndex: number) => {
+                question?.options?.map((option: string |string[], optionIndex: number) => {
                   return (
                     <div className="radio-check">
                      {question.type === 'radio'? (

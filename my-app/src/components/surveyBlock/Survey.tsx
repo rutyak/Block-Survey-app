@@ -4,17 +4,53 @@ import DrawerExample from '../Drawer/DrawerExample'
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+const BaseUrl = 'http://localhost:5000';
 
 const Survey = () => {
 
-  const [video, setVideo] = useState<any>();
-  const [image, setImage] = useState<any>();
-  const [form, setForm] = useState<any>();
+  type questionType ={
+    options: string[],
+    question: string,
+    type: string
+  }
+
+  type formType={
+    desc: string,
+    title: string,
+    type: string,
+    _id: string,
+    stage: string,
+    questions: questionType
+  }
+
+  type videoType={
+    desc: string,
+    title: string,
+    type: string,
+    videoType: string,
+    videoUrl: string,
+    _id: string,
+    stage: string,
+  }
+
+  type imageType={
+    desc: string,
+    title: string,
+    type: string,
+    imageFile: string[],
+    _id: string,
+    stage: string,
+  }
+
+
+  const [video, setVideo] = useState<videoType[]>();
+  const [image, setImage] = useState<imageType[]>();
+  const [form, setForm] = useState<formType[]>();
 
   useEffect( ()=>{
-     axios.get('http://localhost:5000/videoData').then(response => setVideo(response.data.data))
-     axios.get('http://localhost:5000/imageData').then((response)=> setImage(response.data.data))
-     axios.get('http://localhost:5000/formData').then((response) => setForm(response.data.data))
+     axios.get(`${BaseUrl}/videoData`).then(response => setVideo(response.data.data))
+     axios.get(`${BaseUrl}/imageData`).then((response)=> setImage(response.data.data))
+     axios.get(`${BaseUrl}/formData`).then((response) => setForm(response.data.data))
   },[])
 
   console.log("vInfo",video);
@@ -30,9 +66,9 @@ const Survey = () => {
         <div className='formBlock'>
           <h2>Forms</h2>
           <div className="fBlock">
-            {form?.map((ele: any, i: number) => (
+            {form?.map((form: any, i: number) => (
               <div className='formSurvey'>
-                <p>{ele.title}<DrawerExample data={ele} /> </p>
+                <p>{form.title}<DrawerExample data={form} /> </p>
               </div>
             ))
             }
@@ -41,9 +77,9 @@ const Survey = () => {
         <div className='videoBlock'>
           <h2>Videos</h2>
           <div className="vBlock">
-            {video?.map((ele: any, i: number) => (
+            {video?.map((video: any, i: number) => (
               <div className='videoSurvey'>
-                <p>{ele.title}<DrawerExample data={ele} /></p>
+                <p>{video.title}<DrawerExample data={video} /></p>
               </div>
             ))}
           </div>
@@ -52,9 +88,9 @@ const Survey = () => {
         <div className='imageBlock'>
           <h2>Images</h2>
           <div className="iBlock">
-            {image?.map((ele: any, i: number) => (
+            {image?.map((img: any, i: number) => (
               <div className='imgSurvey'>
-                <p>{ele.title}<DrawerExample data={ele} /></p>
+                <p>{img.title}<DrawerExample data={img} /></p>
               </div>
             ))}
           </div>
