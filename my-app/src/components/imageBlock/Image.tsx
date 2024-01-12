@@ -64,6 +64,7 @@ const Image = () => {
         formData.append('desc',titDesc.desc);
         formData.append('type','Image');
         formData.append('stage','');
+        formData.append('answer',JSON.stringify([]));
         try {
            const res = await axios.post(`${BaseUrl}/images`, formData);
            if(res.status===200){

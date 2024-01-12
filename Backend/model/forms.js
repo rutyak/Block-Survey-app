@@ -5,7 +5,8 @@ const formSchema = new mongoose.Schema({
     title: String,
     desc: String,
     questions: [],
-    stage: String
+    stage: String,
+    answer: [String]
 });
 
 let forms = mongoose.model('forms', formSchema);

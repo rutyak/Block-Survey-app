@@ -16,13 +16,14 @@ router.post('/images', upload.array('files'), async (req, res) => {
     const uploadedImages = await Promise.all(uploadPromises);
     console.log("Image uploaded", uploadedImages);
 
-    const { type, title, desc, stage} = req.body;
+    const { type, title, desc, stage, answer} = req.body;
     const newImage = new images({
       type,
       title,
       desc,
       imageFile,
-      stage
+      stage,
+      answer
     });
 
     await newImage.save();
@@ -42,7 +43,7 @@ router.put('/updateImage/:id',async (req, res)=>{
         {stage: stage},
         {new: true}
      );
-     console.log("updated: ",updatedImage);
+    
      if(!updatedImage){
        res.status(404).json({error: 'Not Published'})
      }

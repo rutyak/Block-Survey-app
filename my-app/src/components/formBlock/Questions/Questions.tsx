@@ -38,7 +38,8 @@ const Questions = ({ questions, heading, handleQuestions }: entryTypes) => {
           title: heading.title,
           desc: heading.desc,
           questions: questions,
-          stage: ''
+          stage: '',
+          answer: []
         };
         console.log(postForm);
         try {

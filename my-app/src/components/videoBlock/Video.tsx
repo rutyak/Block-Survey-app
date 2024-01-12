@@ -51,7 +51,8 @@ const Video = () => {
       formData.append('desc',titleDesc.desc);
       formData.append('type',"Video");
       formData.append('videoType',type);
-      formData.append('stage','')
+      formData.append('stage','');
+      formData.append('answer',JSON.stringify([]));
       
       console.log("FormData: ",formData)
       try {

@@ -1,5 +1,5 @@
 const express = require('express');
-const { videos } = require('../model/video');
+const {videos} = require('../model/video');
 const router = express.Router();
 const cloudinary = require('../cloudinary');
 const upload = require('../middleware/multer')
@@ -11,15 +11,17 @@ router.post('/videos/upload',upload.single('file'), async (req, res)=>{
 
   try {
     const {title, desc, type, stage, videoType} = req.body;
+    const answer = JSON.parse(req.body.answer);
     const videoUrl = result.url;
  
     const newVideo = new videos({
        title,
        desc,
-       videoUrl,
        type,
        stage,
-       videoType
+       videoType,
+       videoUrl,
+       answer
     })
  
     await newVideo.save();
@@ -40,7 +42,7 @@ router.put('/updateVideo/:id',async (req, res)=>{
          {stage: stage},
          {new: true}
       );
-      console.log("updated: ",updatedVideo);
+    
       if(!updatedVideo){
         res.status(404).json({error: 'Not Published'})
       }
