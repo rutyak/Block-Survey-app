@@ -16,7 +16,8 @@ router.post('/images', upload.array('files'), async (req, res) => {
     const uploadedImages = await Promise.all(uploadPromises);
     console.log("Image uploaded", uploadedImages);
 
-    const { type, title, desc, stage, answer} = req.body;
+    const { type, title, desc, stage} = req.body;
+    const answer = JSON.parse(req.body.answer);
     const newImage = new images({
       type,
       title,
@@ -37,10 +38,10 @@ router.post('/images', upload.array('files'), async (req, res) => {
 router.put('/updateImage/:id',async (req, res)=>{
   try {
      const id = req.params.id;
-     const {stage} = req.body;
+     
      const updatedImage = await images.findByIdAndUpdate(
         {_id: id},
-        {stage: stage},
+        {$set: req.body},
         {new: true}
      );
     

@@ -34,12 +34,11 @@ router.post('/videos/upload',upload.single('file'), async (req, res)=>{
 
 router.put('/updateVideo/:id',async (req, res)=>{
    try {
-      const {stage} = req.body;
       const id = req.params.id;
       console.log("id: ",id)
       const updatedVideo = await videos.findByIdAndUpdate(
          {_id: id},
-         {stage: stage},
+         {$set: req.body},
          {new: true}
       );
     

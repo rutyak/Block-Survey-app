@@ -58,6 +58,7 @@ const Form = () => {
     }
   }
   console.clear()
+  console.log("que: ",questions)
 
   const addQuestion = (type : string)=>{
     const options = (type !== 'single') ? ['',''] : []
@@ -110,7 +111,7 @@ const Form = () => {
               </label>
               <p>Add at least 5 questions</p>
             </form>
-            {heading.title !== "" && heading.desc !== "" && (
+            {heading.title !== "" && heading.desc !== "" && questions.length!==6 &&(
               <div>
                 <img
                   className="add-que"

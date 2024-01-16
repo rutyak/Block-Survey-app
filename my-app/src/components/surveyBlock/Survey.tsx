@@ -1,7 +1,6 @@
 import Navbar from '../Navbar/Navbar'
 import './Survey.css'
 import DrawerExample from '../Drawer/DrawerExample'
-import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 const BaseUrl = 'http://localhost:5000';

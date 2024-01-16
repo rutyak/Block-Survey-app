@@ -1,4 +1,4 @@
-.formContainer{
+.formContainer {
     height: 100%;
     width: 100%;
     display: flex;
@@ -6,18 +6,19 @@
     align-items: center;
 }
 
-.form-container{
+.form-container {
     text-align: center;
     margin-top: 2rem;
     height: 96%;
     width: 100%;
 }
 
-.form-container h2{
+
+.form-container h2 {
     margin-bottom: 1rem;
 }
 
-.form{
+.form {
     width: 45%;
     display: flex;
     justify-content: center;
@@ -30,31 +31,31 @@
     background: aliceblue;
 }
 
-.form form{
+.form form {
     width: 80%;
 }
 
-.form .add-que{
+.form .add-que {
     width: 1.5rem;
     margin-left: 1rem;
     margin-bottom: 1.2rem;
 }
 
 
-.form .title{
+.form .title {
     margin-left: 2.8rem;
 }
 
-.form p{
+.form p {
     margin-top: 0.8rem;
     color: crimson;
 }
 
-.form-form h2{
+.form-form h2 {
     font-size: larger;
 }
 
-input{
+input {
     width: 80%;
     border: 1px solid gray;
     border-radius: 0.4rem;
@@ -62,7 +63,7 @@ input{
     padding: 0.3rem;
 }
 
-.questions-btn{
+.questions-btn {
     width: 44%;
     margin: auto;
     display: flex;
@@ -72,11 +73,11 @@ input{
     gap: 1rem;
 }
 
-.questions-btn img{
-   width: 1.5rem;
+.questions-btn img {
+    width: 1.5rem;
 }
 
-.questions-btn button{
+.questions-btn button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -87,6 +88,115 @@ input{
     background-color: #536e6c;
 }
 
-.formBlock h2, .videoBlock h2, .imageBlock h2{
+.formBlock h2,
+.videoBlock h2,
+.imageBlock h2 {
     font-size: larger;
+}
+
+@media screen and (max-width: 991px) {
+    .form {
+        width: 70%;
+    }
+
+    .entryBtn {
+        width: 34%;
+    }
+
+    .container {
+        width: 15%;
+    }
+
+    .input {
+        width: 69%;
+    }
+
+    .questions-btn button {
+        padding: 0.8rem;
+    }
+
+    .questions-btn {
+        width: 69%;
+    }
+
+    .questions {
+        width: 76%;
+    }
+
+    .numbering input {
+        width: 81%;
+    }
+
+}
+
+@media screen and (max-width: 780px) {
+    .form {
+        width: 83%;
+    }
+
+    .entryBtn {
+        width: 34%;
+    }
+
+    .container {
+        width: 20%;
+    }
+
+    .input {
+        width: 69%;
+    }
+
+    .questions-btn button {
+        padding: 0.8rem;
+    }
+
+    .questions-btn {
+        width: 81%;
+    }
+
+    .questions {
+        width: 76%;
+    }
+
+    .numbering input {
+        width: 81%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .entryBtn {
+        width: 55%;
+    }
+
+    .container {
+        width: 18%;
+    }
+
+    .container h1{
+        font-size: 1.2rem;
+    }
+
+    .input {
+        width: 69%;
+    }
+
+    .form {
+        width: 100%;
+    }
+
+    .questions-btn button {
+        padding: 0.8rem;
+    }
+
+    .questions-btn {
+        width: 100%;
+    }
+
+    .questions {
+        width: 95%;
+    }
+
+    .numbering input {
+        width: 100%;
+    }
 }

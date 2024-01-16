@@ -54,8 +54,6 @@ const Image = () => {
     
     async function handleImgSubmit(){
         try {
-          
-
         const formData = new FormData();
         for(let i=0; i<img.length;i++){
            formData.append('files',img[i])

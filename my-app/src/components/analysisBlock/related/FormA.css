@@ -1,0 +1,25 @@
+.from-res {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    margin-left: 28%;
+}
+
+.from-res h1{
+    margin-top: -9rem;
+    font-size: x-large;
+    color: chartreuse;
+}
+
+.que-form b{
+    margin-bottom: 0.3rem;
+    font-size: 1.4rem;
+}
+
+.ans-form p{
+    margin-bottom: 0.8rem;
+    font-size: larger;
+}

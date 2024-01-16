@@ -27,11 +27,10 @@ router.post('/forms',async (req, res)=>{
  router.put('/updateForm/:id',async (req, res)=>{
    try {
       const id = req.params.id;
-      const {stage} = req.body;
    
       const updatedForm = await forms.findByIdAndUpdate(
          {_id: id},
-         {stage: stage},
+         {$set: req.body},
          {new: true}
       );
      

@@ -37,3 +37,21 @@
     align-items: center;
     gap: 1rem;
 }
+
+@media screen and (max-width: 991px) {
+    .questions{
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 780px) {
+    .questions{
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .questions{
+        width: 95%;
+    }
+}

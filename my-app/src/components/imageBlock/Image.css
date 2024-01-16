@@ -19,3 +19,31 @@
     font-size: small;
     background-color: #6d824c;
 }
+
+@media screen and (max-width: 991px) {
+    .entryBtn {
+        width: 34%;
+    }
+    .container{
+        width: 15%;
+    }
+}
+
+@media screen and (max-width: 780px) {
+   .container{
+    width: 12%;
+   }
+   .entryBtn {
+    width: 34%;
+   }
+
+}
+
+@media screen and (max-width: 480px) {
+    .entryBtn{
+        width: 55%;
+    }
+    .container {
+        width: 20%;
+    }
+}

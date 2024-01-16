@@ -6,7 +6,10 @@ const imgSchema = new mongoose.Schema({
     desc: String,
     imageFile: [String],
     stage: String,
-    answer: [String]
+    answer: [{
+        img1: String,
+        img2: String
+    }]
 });
 
 let images = mongoose.model('images',imgSchema);

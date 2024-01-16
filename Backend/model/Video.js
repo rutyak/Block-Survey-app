@@ -7,7 +7,10 @@ const videoSchema = new mongoose.Schema({
     type: String,
     videoType: String,
     stage: String,
-    answer: [String]
+    answer: [{
+        start: String,
+        end: String
+    }]
 })
 
 let videos = mongoose.model('videos',videoSchema);
