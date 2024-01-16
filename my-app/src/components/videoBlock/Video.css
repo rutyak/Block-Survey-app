@@ -57,22 +57,42 @@
 
 @media screen and (max-width: 991px) {
 
-    .entryBtn {
-        width: 34%;
+    .entryBtn{
+        width: 55%;
     }
-    .container{
+    .container {
         width: 15%;
+    }
+    .container h1{
+        font-size: 1.5rem;
+    }
+    .nav{
+        width: 33%;
+    }
+
+    .form-video{
+        width: 55%;
     }
 
 }
 
 @media screen and (max-width: 780px) {
-   .container{
-    width: 12%;
-   }
-   .entryBtn {
-    width: 34%;
-   }
+    .entryBtn{
+        width: 55%;
+    }
+    .container {
+        width: 20%;
+    }
+    .container h1{
+        font-size: 1.4rem;
+    }
+    .nav {
+        width: 47%;
+    }
+
+    .form-video{
+        width: 60%;
+    }
 
 }
 
@@ -82,5 +102,15 @@
     }
     .container {
         width: 20%;
+    }
+    .container h1{
+        font-size: 1.3rem;
+    }
+    .nav{
+        width: 52%;
+    }
+
+    .form-video{
+        width: 90%;
     }
 }

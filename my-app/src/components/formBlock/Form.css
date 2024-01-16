@@ -99,6 +99,10 @@ input {
         width: 70%;
     }
 
+    .nav{
+        width: 33%;
+    }
+
     .entryBtn {
         width: 34%;
     }
@@ -140,6 +144,9 @@ input {
 
     .container {
         width: 20%;
+    }
+    .nav {
+        width: 47%;
     }
 
     .input {

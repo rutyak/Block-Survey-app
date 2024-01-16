@@ -54,7 +54,7 @@ const Form = () => {
                   <div key={i}>
                     <div className="ques-survey">
                       <div className="que-form">
-                        <b>{j+1}. {survey.que}</b>
+                        <b>{survey.que? j+1.: ''} {survey.que}</b>
                       </div>
                       <div className="ans-form">
                         <p>{survey.ans}</p>

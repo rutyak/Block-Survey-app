@@ -8,18 +8,100 @@
     margin-left: 28%;
 }
 
-.from-res h1{
-    margin-top: -9rem;
+.from-res h1 {
+    margin-top: -7rem;
     font-size: x-large;
     color: chartreuse;
+    margin-left: 10%;
 }
 
-.que-form b{
+.que-form b {
     margin-bottom: 0.3rem;
     font-size: 1.4rem;
 }
 
-.ans-form p{
+.ans-form p {
     margin-bottom: 0.8rem;
     font-size: larger;
+}
+
+@media screen and (max-width: 991px) {
+    .from-res {
+        margin-left: 20%;
+    }
+
+
+    .que-form b {
+        margin-bottom: 0.3rem;
+        font-size: larger;
+    }
+    
+    .ans-form p {
+        margin-bottom: 0.8rem;
+        font-size: larger;
+    }
+
+    .nav{
+        width: 33%;
+    }
+
+
+    .from-res h1 {
+        margin-top: -5rem;
+        font-size: larger;
+        color: chartreuse;
+        margin-left: 12%;
+    }
+}
+
+@media screen and (max-width: 780px) {
+    .from-res {
+        margin-left: 15%;
+    }
+
+
+    .que-form b {
+        margin-bottom: 0.3rem;
+        font-size: large;
+    }
+    .nav {
+        width: 47%;
+    }
+
+    .ans-form p {
+        margin-bottom: 0.8rem;
+        font-size: large;
+    }
+
+    .from-res h1 {
+        margin-top: -5rem;
+        font-size: larger;
+        color: chartreuse;
+        margin-left: 16%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .from-res {
+        margin-left: 5%;
+    }
+
+
+    .que-form b {
+        margin-bottom: 0.3rem;
+        font-size: small;
+    }
+    
+    .ans-form p {
+        margin-bottom: 0.8rem;
+        font-size: small;
+    }
+
+    .from-res h1 {
+        margin-top: -5rem;
+        font-size: large;
+        color: chartreuse;
+        margin-left: 10%;
+    }
+
 }

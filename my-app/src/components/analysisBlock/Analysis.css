@@ -61,3 +61,25 @@
 .formBlock, .videoBlock, .imageBlock{
     width: 24.3%;
 }
+
+.blocks{
+    gap: 0.6rem;
+}
+
+@media screen and (max-width: 991px) {
+    
+}
+
+@media screen and (max-width: 780px) {
+   
+    .search-part img{
+        margin-left: 64%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .search-part img{
+        margin-left: 55%;
+    }
+
+}

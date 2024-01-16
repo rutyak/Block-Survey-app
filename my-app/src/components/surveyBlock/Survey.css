@@ -54,8 +54,7 @@
 
 @media screen and (max-width: 991px) {
     .nav{
-        width: 53%;
-        height: 93.3%;
+        width: 33%;
     }
 
     .container h1{
@@ -67,6 +66,9 @@
    .container{
     width: 12%;
    }
+   .nav {
+    width: 47%;
+}
 }
 
 @media screen and (max-width: 480px) {

@@ -27,6 +27,9 @@
     .container{
         width: 15%;
     }
+    .nav{
+        width: 33%;
+    }
 }
 
 @media screen and (max-width: 780px) {
@@ -36,6 +39,9 @@
    .entryBtn {
     width: 34%;
    }
+   .nav {
+    width: 47%;
+}
 
 }
 
