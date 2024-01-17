@@ -22,6 +22,7 @@
 .video-img-from-res video {
     border-radius: 1rem;
     margin-bottom: 1rem;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
 @media screen and (max-width: 991px) {
@@ -112,7 +113,7 @@
     }
 
     .video-img-from-res p {
-        margin-left: 18%;
+        margin-left: 0%;
     }
 
     .video-img-from-res {
