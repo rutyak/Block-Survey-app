@@ -1,5 +1,5 @@
 const express = require('express');
-const {videos} = require('../model/video');
+const {videos} = require('../model/Video')
 const router = express.Router();
 const cloudinary = require('../cloudinary');
 const upload = require('../middleware/multer')
