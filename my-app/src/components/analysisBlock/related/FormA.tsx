@@ -34,7 +34,7 @@ const Form = () => {
   const [form, setForm] = useState<formType[]>();
 
   useEffect(() => {
-    axios.get(`${BaseUrl}/formData`).then(response => setForm(response.data.data))
+    axios.get(`${BaseUrl}/formAnsData`).then(response => setForm(response.data.data))
   }, [])
 
   console.log("anaForm", form);

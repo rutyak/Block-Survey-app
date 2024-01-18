@@ -63,7 +63,7 @@ const Video = () => {
   const [videoD, setVideoD] = useState<videoAType[]>()
 
   useEffect(() => {
-    axios.get(`${BaseUrl}/videoData`).then(response => setVideoD(response.data.data))
+    axios.get(`${BaseUrl}/videoAnsData`).then(response => setVideoD(response.data.data))
   }, [])
 
   console.log("anaVideo", videoD)

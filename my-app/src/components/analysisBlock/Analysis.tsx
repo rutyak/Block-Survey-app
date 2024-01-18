@@ -43,9 +43,9 @@ const Analysis = () => {
 
   const navigate = useNavigate();
   const [search, setSearch] = useState<any>('');
-  const [video, setVideo] = useState<videoType[]>();
-  const [image, setImage] = useState<imageType[]>();
-  const [form, setForm] = useState<formType[]>();
+  const [videoA, setVideoA] = useState<videoType[]>();
+  const [imageA, setImageA] = useState<imageType[]>();
+  const [formA, setFormA] = useState<formType[]>();
 
   const [filteredVideo, setFitleredVideo] = useState<videoType[]>();
   const [filteredImage, setFilteredImage] = useState<imageType[]>();
@@ -53,25 +53,25 @@ const Analysis = () => {
 
 
   useEffect( ()=>{
-     axios.get(`${BaseUrl}/videoData`).then(response => setVideo(response.data.data))
-     axios.get(`${BaseUrl}/imageData`).then((response)=> setImage(response.data.data))
-     axios.get(`${BaseUrl}/formData`).then((response) => setForm(response.data.data))
+     axios.get(`${BaseUrl}/videoAnsData`).then(response => setVideoA(response.data.data))
+     axios.get(`${BaseUrl}/imageAnsData`).then((response)=> setImageA(response.data.data))
+     axios.get(`${BaseUrl}/formAnsData`).then((response) => setFormA(response.data.data))
   },[])
 
-  console.log("vInfo",video);
-  console.log("iInfo",image);
-  console.log("fInfo",form);
+  console.log("vAns",videoA);
+  console.log("iAns",imageA);
+  console.log("fAns",formA);
   
   function handleSearchBlock(e: any){
     setSearch(e.target.value)
     
-    let filteredF = form?.filter((form: formType, i:number)=>(
+    let filteredF = formA?.filter((form: formType, i:number)=>(
       form.title.toLowerCase().includes(search.toLowerCase())
     ))
-    let filteredV = video?.filter((video: videoType, i:number)=>(
+    let filteredV = videoA?.filter((video: videoType, i:number)=>(
       video.title.toLowerCase().includes(search.toLowerCase())
     ))
-    let filteredI = image?.filter((image: imageType, i:number)=>(
+    let filteredI = imageA?.filter((image: imageType, i:number)=>(
       image.title.toLowerCase().includes(search.toLowerCase())
     ))
 
@@ -100,10 +100,10 @@ const Analysis = () => {
         <div className='blocks'>
         <div className='formBlock'>
           <div className="fBlock">
-            { (search? filteredForm: form)?.map((form: any, i: number) => (
+            { (search? filteredForm: formA)?.map((form: any, i: number) => (
               form.answer.length !== 0 ? (
               <div className='formSurvey'  onClick={()=>navigate(`/form/${form.title}`)}>
-                <p>{form.title}</p>
+                <p>{form.title} <br /> Responsed by: {form.name}</p>
               </div>
               ):''
             ))
@@ -112,10 +112,11 @@ const Analysis = () => {
         </div>
         <div className='videoBlock'>
           <div className="vBlock">
-            {(search? filteredVideo: video)?.map((video: any, i: number) => (
+            {(search? filteredVideo: videoA)?.map((video: any, i: number) => (
               video.answer.length !== 0 ? (
               <div className='videoSurvey'  onClick={()=>navigate(`/video/${video.title}`)}>
-                <p>{video.title}</p>
+                <p>{video.title} <br /> Responsed by: {video.name}</p>
+
               </div>
               ):''
             ))}
@@ -124,10 +125,10 @@ const Analysis = () => {
         </div>
         <div className='imageBlock'>
           <div className="iBlock">
-            {(search? filteredImage: image)?.map((img: any, i: number) => (
+            {(search? filteredImage: imageA)?.map((img: any, i: number) => (
               img.answer.length !== 0 ? (
                 <div className='imgSurvey'  onClick={()=>navigate(`/image/${img.title}`)}>
-                <p>{img.title}</p>
+                <p>{img.title} <br /> Responsed by: {img.name}</p>
               </div>
               ): ''
             ))}

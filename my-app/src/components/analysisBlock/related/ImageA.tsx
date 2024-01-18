@@ -28,7 +28,7 @@ const Image = () => {
   const [image, setImage] = useState<imageType[]>();
 
   useEffect(() => {
-    axios.get(`${BaseUrl}/imageData`).then(response => setImage(response.data.data))
+    axios.get(`${BaseUrl}/imageAnsData`).then(response => setImage(response.data.data))
   }, [])
   console.log("ImageData: ", image);
 

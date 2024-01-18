@@ -11,7 +11,6 @@ router.post('/videos/upload',upload.single('file'), async (req, res)=>{
 
   try {
     const {title, desc, type, stage, videoType} = req.body;
-    const answer = JSON.parse(req.body.answer);
     const videoUrl = result.url;
  
     const newVideo = new videos({
@@ -20,8 +19,7 @@ router.post('/videos/upload',upload.single('file'), async (req, res)=>{
        type,
        stage,
        videoType,
-       videoUrl,
-       answer
+       videoUrl
     })
  
     await newVideo.save();

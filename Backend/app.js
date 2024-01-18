@@ -11,8 +11,11 @@ const imageSurvey = require('./routes/imageSurvey')
 const videoFetch = require('./routes/videoFetch')
 const formFetch = require('./routes/formFetch')
 const imageFetch = require('./routes/imageFetch')
+const formAnswers = require('./routes/formAnswers');
+const imageAnswers = require('./routes/imageAnswers');
+const videoAnswers = require('./routes/videoAnswers');
 
-mongoose.connect('mongodb+srv://rutikkhandekar:rutik123@clustersurvey.nxyku.mongodb.net/Surveys', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb://localhost:27017/Surveys', {useNewUrlParser: true, useUnifiedTopology: true});
 
 app.use(videoSurvey); //middleware it executes one by one
 app.use(formSurvey);
@@ -20,6 +23,9 @@ app.use(imageSurvey);
 app.use(videoFetch); // fetching
 app.use(formFetch);
 app.use(imageFetch);
+app.use(formAnswers);
+app.use(videoAnswers);
+app.use(imageAnswers);
 
 app.listen(port,()=>{
     console.log(`Server is running at http://localhost:${port}`);

@@ -17,14 +17,12 @@ router.post('/images', upload.array('files'), async (req, res) => {
     console.log("Image uploaded", uploadedImages);
 
     const { type, title, desc, stage} = req.body;
-    const answer = JSON.parse(req.body.answer);
     const newImage = new images({
       type,
       title,
       desc,
       imageFile,
-      stage,
-      answer
+      stage
     });
 
     await newImage.save();
