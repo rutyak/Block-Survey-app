@@ -12,7 +12,7 @@ const videoFetch = require('./routes/videoFetch')
 const formFetch = require('./routes/formFetch')
 const imageFetch = require('./routes/imageFetch')
 
-mongoose.connect('mongodb://localhost:27017/Surveys', {useUnifiedTopology: true});
+mongoose.connect('mongodb+srv://rutikkhandekar123:rutik%40123@clustersurvey.nxyku.mongodb.net/Surveys', {useNewUrlParser: true, useUnifiedTopology: true});
 
 app.use(videoSurvey); //middleware it executes one by one
 app.use(formSurvey);
