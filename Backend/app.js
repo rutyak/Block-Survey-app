@@ -15,7 +15,7 @@ const formAnswers = require('./routes/formAnswers');
 const imageAnswers = require('./routes/imageAnswers');
 const videoAnswers = require('./routes/videoAnswers');
 
-mongoose.connect('mongodb://localhost:27017/Surveys', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb+srv://rutikkhandekar:rutik123@clustersurvey.nxyku.mongodb.net/Surveys', {useNewUrlParser: true, useUnifiedTopology: true});
 
 app.use(videoSurvey); //middleware it executes one by one
 app.use(formSurvey);

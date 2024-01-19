@@ -78,8 +78,9 @@ const Video = () => {
         </div>
         {
           videoD?.map((video: videoAType, i: number) => {
-            if (videoId === video.title) {
-              return (<div key={i}>
+            if (videoId === video._id) {
+              return (
+              <div key={i}>
                 <video ref={videoRef} width="550px" height="450px" controls onLoadedData={() => handleAnswer(video.answer[0].start, video.answer[0].end)}>
                   <source src={video.videoUrl} type={`video/${video.videoType}`} />
                 </video>

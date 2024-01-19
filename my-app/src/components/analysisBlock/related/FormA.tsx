@@ -48,7 +48,7 @@ const Form = () => {
         </div>
         {
           form?.map((form: formType, i: number) => {
-            if (formId === form.title) {
+            if (formId === form._id) {
               return (
                 form.answer?.map((survey: ansType, j: number) => (
                   <div key={i}>
@@ -57,7 +57,7 @@ const Form = () => {
                         <b>{survey.que? j+1.: ''} {survey.que}</b>
                       </div>
                       <div className="ans-form">
-                        <p>{survey.ans}</p>
+                        <p>{survey.ans+'  '}</p>
                       </div>
                     </div>
                   </div>

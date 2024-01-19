@@ -42,7 +42,7 @@ const Image = () => {
         </div>
         {
           image?.map((img: imageType, i: number) => {
-            if (imageId === img.title) {
+            if (imageId === img._id) {
               return (
                 <div key={i}>
                   <div>

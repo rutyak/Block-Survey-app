@@ -14,6 +14,7 @@ const Analysis = () => {
   }
 
   type formType={
+    name: string,
     desc: string,
     title: string,
     type: string,
@@ -23,6 +24,7 @@ const Analysis = () => {
   }
 
   type videoType={
+    name:string,
     desc: string,
     title: string,
     type: string,
@@ -33,6 +35,7 @@ const Analysis = () => {
   }
 
   type imageType={
+    name: string,
     desc: string,
     title: string,
     type: string,
@@ -66,13 +69,16 @@ const Analysis = () => {
     setSearch(e.target.value)
     
     let filteredF = formA?.filter((form: formType, i:number)=>(
-      form.title.toLowerCase().includes(search.toLowerCase())
+      form.title.toLowerCase().includes(search.toLowerCase()) ||
+      form.name.toLowerCase().includes(search.toLowerCase())
     ))
     let filteredV = videoA?.filter((video: videoType, i:number)=>(
-      video.title.toLowerCase().includes(search.toLowerCase())
+      video.title.toLowerCase().includes(search.toLowerCase()) || 
+      video.name.toLowerCase().includes(search.toLowerCase())
     ))
     let filteredI = imageA?.filter((image: imageType, i:number)=>(
-      image.title.toLowerCase().includes(search.toLowerCase())
+      image.title.toLowerCase().includes(search.toLowerCase()) || 
+      image.name.toLowerCase().includes(search.toLowerCase())
     ))
 
     setfilteredForm(filteredF);
@@ -102,7 +108,7 @@ const Analysis = () => {
           <div className="fBlock">
             { (search? filteredForm: formA)?.map((form: any, i: number) => (
               form.answer.length !== 0 ? (
-              <div className='formSurvey'  onClick={()=>navigate(`/form/${form.title}`)}>
+              <div className='formSurvey'  onClick={()=>navigate(`/form/${form._id}`)}>
                 <p>{form.title} <br /> Responsed by: {form.name}</p>
               </div>
               ):''
@@ -114,9 +120,8 @@ const Analysis = () => {
           <div className="vBlock">
             {(search? filteredVideo: videoA)?.map((video: any, i: number) => (
               video.answer.length !== 0 ? (
-              <div className='videoSurvey'  onClick={()=>navigate(`/video/${video.title}`)}>
+              <div className='videoSurvey'  onClick={()=>navigate(`/video/${video._id}`)}>
                 <p>{video.title} <br /> Responsed by: {video.name}</p>
-
               </div>
               ):''
             ))}
@@ -127,7 +132,7 @@ const Analysis = () => {
           <div className="iBlock">
             {(search? filteredImage: imageA)?.map((img: any, i: number) => (
               img.answer.length !== 0 ? (
-                <div className='imgSurvey'  onClick={()=>navigate(`/image/${img.title}`)}>
+                <div className='imgSurvey'  onClick={()=>navigate(`/image/${img._id}`)}>
                 <p>{img.title} <br /> Responsed by: {img.name}</p>
               </div>
               ): ''
