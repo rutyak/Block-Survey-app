@@ -6,7 +6,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "npm i",
-    "dev": "nodemon app.js",
+    "dev": "node index.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "coverage": "npm test -- --coverage"

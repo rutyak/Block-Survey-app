@@ -14,8 +14,7 @@ router.post('/images', upload.array('files'), async (req, res) => {
     });
 
     const uploadedImages = await Promise.all(uploadPromises);
-    console.log("Image uploaded", uploadedImages);
-
+    
     const { type, title, desc, stage} = req.body;
     const newImage = new images({
       type,
