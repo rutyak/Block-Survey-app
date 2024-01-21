@@ -15,7 +15,7 @@ const formAnswers = require('./routes/formAnswers');
 const imageAnswers = require('./routes/imageAnswers');
 const videoAnswers = require('./routes/videoAnswers');
 
-mongoose.connect('mongodb://rutikkhandekar123:rutik123@ac-t9lwjqo-shard-00-00.mrdcdde.mongodb.net:27017,ac-t9lwjqo-shard-00-01.mrdcdde.mongodb.net:27017,ac-t9lwjqo-shard-00-02.mrdcdde.mongodb.net:27017/Surveys?replicaSet=atlas-10x7wo-shard-0&ssl=true&authSource=admin')
+mongoose.connect('mongodb://rutikkhandekar123:rutik123@ac-t9lwjqo-shard-00-00.mrdcdde.mongodb.net:27017,ac-t9lwjqo-shard-00-01.mrdcdde.mongodb.net:27017,ac-t9lwjqo-shard-00-02.mrdcdde.mongodb.net:27017/?ssl=true&replicaSet=atlas-10x7wo-shard-0&authSource=admin&retryWrites=true&w=majority')
  
 const connection = mongoose.connection;
  
