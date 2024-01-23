@@ -6,6 +6,7 @@ const formSchema = new mongoose.Schema({
     desc: String,
     questions: [],
     stage: String,
+    status: String
 });
 
 let forms = mongoose.model('forms', formSchema);

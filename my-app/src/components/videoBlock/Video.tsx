@@ -9,7 +9,6 @@ const BaseUrl = 'http://localhost:5000';
 
 const Video = () => {
   
-  
   interface BtnType{
     addVideoBtn: boolean,
     addVideoSurvey: boolean,
@@ -76,7 +75,7 @@ const Video = () => {
   return ( 
     <div className='videoContainer'>
       <Navbar/>
-      <div className='video-container'>
+      <div className='video-container' data-testid='video-container'>
       {btn.createBtn && 
       <Entry handleSurveyToggle={handleSurveyToggle} btnTitle={"Create Video Survey"}/>
       }

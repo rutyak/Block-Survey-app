@@ -1,4 +1,3 @@
-import { useDispatch } from "react-redux";
 import "./Questions.css";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -28,7 +27,6 @@ type entryTypes = {
 };
 
 const Questions = ({ questions, heading, handleQuestions }: entryTypes) => {
-  const dispatch = useDispatch();
     async function handleFormSubmit() {
       try {
         console.log("HandleSubmit Click");
@@ -95,7 +93,9 @@ const Questions = ({ questions, heading, handleQuestions }: entryTypes) => {
 
       {
         questions.length === 6 && 
-        <button className="submit-btn" onClick={handleFormSubmit}>Submit</button>
+        <div className="form-submit-btn">
+          <button className="submit-btn" onClick={handleFormSubmit}>Submit</button>
+        </div>
       }
     </div>
   );

@@ -15,6 +15,11 @@ const Form = () => {
     que: string,
     ans: string
   }
+  type answerType = {
+    name: string,
+    title: string,
+    answer: ansType[]
+  }
 
   type questionType = {
     options: string[],
@@ -23,6 +28,7 @@ const Form = () => {
   }
 
   type formType = {
+    name: string,
     desc: string,
     title: string,
     type: string,
@@ -31,42 +37,55 @@ const Form = () => {
     questions: questionType[]
     answer: ansType[]
   }
-  const [form, setForm] = useState<formType[]>();
+  const [formA, setFormA] = useState<formType[]>();
 
   useEffect(() => {
-    axios.get(`${BaseUrl}/formAnsData`).then(response => setForm(response.data.data))
+    try {
+      axios.get(`${BaseUrl}/formAnsData`).then(response => {
+        setFormA(response.data.data)
+        console.log("anaForm", response.data.data);
+      })
+    } catch (error) {
+      console.log(error)
+    }
   }, [])
 
-  console.log("anaForm", form);
+  console.log("anaForm", formA);
+  console.log("formId: ", formId);
 
   return (
     <div className='video-img-form-user-res'>
       <Navbar />
-      <div className="from-res">
-        <div>
+      <div className="form-container">
+        <div className="video-img-form-user-res-title">
           <h1>User response on survey!!</h1>
         </div>
-        {
-          form?.map((form: formType, i: number) => {
-            if (formId === form._id) {
-              return (
-                form.answer?.map((survey: ansType, j: number) => (
+        <div className="from-res">
+          {
+            formA?.map((form: formType, i: number) => (
+              formId === form.title ?(
                   <div key={i}>
-                    <div className="ques-survey">
-                      <div className="que-form">
-                        <b>{survey.que? j+1.: ''} {survey.que}</b>
-                      </div>
-                      <div className="ans-form">
-                        <p>{survey.ans+'  '}</p>
-                      </div>
+                    <div>
+                      <b className="response">Response by : {form.name}</b>
                     </div>
+                    {form.answer?.map((survey: ansType, j: number) => (
+                      <div key={i} >
+                        <div className="ques-survey">
+                          <div className="que-form">
+                            <b>{survey.que ? j + 1. : ''} {survey.que}</b>
+                          </div>
+                          <div className="ans-form">
+                            <p>{survey.ans + '  '}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                ))
-              )
-            }
-          })
-        }
+                ): ''
+             ))
+          }
 
+        </div>
       </div>
     </div>
   )

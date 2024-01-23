@@ -11,7 +11,6 @@ const BaseUrl = 'http://localhost:5000';
 
 const Image = () => {
 
-    const dispatch = useDispatch();
     const [img, setImg] = useState<File[]>([])
     const [display, setDisplay] = useState<boolean>(true);
 
@@ -83,7 +82,7 @@ const Image = () => {
     return  (
         <div className='videoContainer'>
             <Navbar/>
-            <div className='video-container'>
+            <div className='video-container' data-testid='image-container'>
             {btn.createBtn &&
                 <Entry handleSurveyToggle={handleSurveyToggle} btnTitle={"Create Image Survey"} />
             }

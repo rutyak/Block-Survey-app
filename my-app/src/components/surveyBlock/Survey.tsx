@@ -47,7 +47,7 @@ const Survey = () => {
   const [form, setForm] = useState<formType[]>();
 
   useEffect( ()=>{
-     axios.get(`${BaseUrl}/videoData`).then(response => setVideo(response.data.data))
+     axios.get(`${BaseUrl}/videoData`).then((response) => setVideo(response.data.data))
      axios.get(`${BaseUrl}/imageData`).then((response)=> setImage(response.data.data))
      axios.get(`${BaseUrl}/formData`).then((response) => setForm(response.data.data))
   },[])
@@ -61,7 +61,7 @@ const Survey = () => {
   return (
     <div className='surveyContainer'>
       <Navbar />
-      <div className='survey-container'>
+      <div className='survey-container' data-testid='survey-container'>
         <div className='formBlock'>
           <h2>Forms</h2>
           <div className="fBlock">

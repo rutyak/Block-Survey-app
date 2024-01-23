@@ -72,7 +72,7 @@ const Form = () => {
   return (
     <div className="formContainer">
       <Navbar/>
-      <div className="form-container">
+      <div className="form-container" data-testid='form-container'>
       {btn.removeAddSurvey && 
       <Entry handleSurveyToggle={handleSurveyToggle} btnTitle={"Create Survey"}/>
       }

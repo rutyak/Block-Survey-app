@@ -11,7 +11,7 @@ const Image = () => {
   const param = useParams();
   const imageId = param.imageId;
 
-  type ansType ={
+  type ansType = {
     img1: string,
     img2: string
   }
@@ -20,17 +20,18 @@ const Image = () => {
     desc: string,
     title: string,
     type: string,
+    name: string,
     imageFile: string[],
     _id: string,
     stage: string,
     answer: ansType[]
   }
-  const [image, setImage] = useState<imageType[]>();
+  const [imageA, setImageA] = useState<imageType[]>();
 
   useEffect(() => {
-    axios.get(`${BaseUrl}/imageAnsData`).then(response => setImage(response.data.data))
+    axios.get(`${BaseUrl}/imageAnsData`).then(response => setImageA(response.data.data))
   }, [])
-  console.log("ImageData: ", image);
+  console.log("imgAns: ", imageA);
 
 
   return (
@@ -40,11 +41,14 @@ const Image = () => {
         <div>
           <h1>User response on images!!</h1>
         </div>
+        <div className='video-res-container'>
         {
-          image?.map((img: imageType, i: number) => {
-            if (imageId === img._id) {
-              return (
-                <div key={i}>
+          imageA?.map((img: imageType, i: number) => (
+            img.title === imageId ? (
+                <div key={i} className="new-img-flex">
+                  <div>
+                    <b className="response">Response by : {img.name}</b>
+                  </div>
                   <div>
                     <div className="img-flex">
                       <img src={img.answer[0].img1} alt="img1" />
@@ -55,11 +59,10 @@ const Image = () => {
                     </div>
                   </div>
                 </div>
-              )
-            }
-          })
+            ) : ''
+          ))
         }
-
+        </div>
       </div>
     </div>
   )

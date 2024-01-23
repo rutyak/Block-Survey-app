@@ -9,7 +9,7 @@ import FormA from './components/analysisBlock/related/FormA'
 import VideoA from './components/analysisBlock/related/VideoA';
 import Analysis from './components/analysisBlock/Analysis';
 import React, {Suspense} from 'react';
-import Navbar from './components/Navbar/Navbar';
+
 
 const  Survey = React.lazy(()=>import('./components/surveyBlock/Survey'));
 
