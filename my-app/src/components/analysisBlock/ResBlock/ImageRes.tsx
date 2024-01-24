@@ -21,7 +21,10 @@ const ImageRes = () => {
   const [imageA, setImageA] = useState<imageAnsType[]>()
 
   useEffect(() => {
-    axios.get(`${BaseUrl}/imageAnsData`).then(res => setImageA(res.data.data))
+    (async function fetch(){
+      const res = await axios.get(`${BaseUrl}/imageAnsData`);
+      setImageA(res.data.data)
+    })()
   }, [])
 
   return (

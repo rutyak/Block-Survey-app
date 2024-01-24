@@ -42,10 +42,9 @@ const Questions = ({ questions, heading, handleQuestions }: entryTypes) => {
         console.log(postForm);
         try {
           const res = await axios.post(`${BaseUrl}/forms`, postForm);
-          if (res.status === 200) {
-            console.log(res.data);
+          if (res.status === 200) 
             toast.success("Survey uploaded successfully!!");
-          }
+ 
         } catch (error) {
           console.log(error);
           toast.error("Uploding fail");
@@ -64,17 +63,16 @@ const Questions = ({ questions, heading, handleQuestions }: entryTypes) => {
         questions?.map((question: typeObj, index: number) => {
 
           no++;
-          console.log(no);
 
           return (
-            <div>
+            <div key={index}>
               { question.type &&
                <div className="numbering"><b>{no}</b><input type="text" placeholder="Enter your question?" onChange={(e) => handleQuestions(e, index)} /></div> 
               }
               {
                 question?.options?.map((option: string |string[], optionIndex: number) => {
                   return (
-                    <div className="radio-check">
+                    <div className="radio-check" key={optionIndex}>
                      {question.type === 'radio'? (
                       <input className="radio-check-width" type="radio" placeholder="Option 1"/>
                       ):(

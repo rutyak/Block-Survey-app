@@ -7,13 +7,13 @@ const BaseUrl = 'http://localhost:5000';
 
 const Survey = () => {
 
-  type questionType ={
+  type questionType = {
     options: string[],
     question: string,
     type: string
   }
 
-  type formType={
+  type formType = {
     desc: string,
     title: string,
     type: string,
@@ -22,7 +22,7 @@ const Survey = () => {
     questions: questionType
   }
 
-  type videoType={
+  type videoType = {
     desc: string,
     title: string,
     type: string,
@@ -32,7 +32,7 @@ const Survey = () => {
     stage: string,
   }
 
-  type imageType={
+  type imageType = {
     desc: string,
     title: string,
     type: string,
@@ -46,17 +46,27 @@ const Survey = () => {
   const [image, setImage] = useState<imageType[]>();
   const [form, setForm] = useState<formType[]>();
 
-  useEffect( ()=>{
-     axios.get(`${BaseUrl}/videoData`).then((response) => setVideo(response.data.data))
-     axios.get(`${BaseUrl}/imageData`).then((response)=> setImage(response.data.data))
-     axios.get(`${BaseUrl}/formData`).then((response) => setForm(response.data.data))
-  },[])
+  useEffect(() => {
+    (async function fetch() {
+      try {
+        const video = await axios.get(`${BaseUrl}/videoData`);
+        console.log("viddeo: ", video.data.data)
+        setVideo(video.data.data);
+        const res1 = await axios.get(`${BaseUrl}/imageData`);
+        setImage(res1.data.data);
+        const res2 = await axios.get(`${BaseUrl}/formData`);
+        setForm(res2.data.data);
+      } catch (error) {
+          console.log(error)
+      }
+    })()
+  }, [])
 
-  console.log("vInfo",video);
-  console.log("iInfo",image);
-  console.log("fInfo",form);
+  console.log("vInfo", video);
+  console.log("iInfo", image);
+  console.log("fInfo", form);
 
-   
+
 
   return (
     <div className='surveyContainer'>
@@ -66,7 +76,7 @@ const Survey = () => {
           <h2>Forms</h2>
           <div className="fBlock">
             {form?.map((form: any, i: number) => (
-              <div className='formSurvey'>
+              <div className='formSurvey' key={i}>
                 <p>{form.title}<DrawerExample data={form} /> </p>
               </div>
             ))
@@ -77,7 +87,7 @@ const Survey = () => {
           <h2>Videos</h2>
           <div className="vBlock">
             {video?.map((video: any, i: number) => (
-              <div className='videoSurvey'>
+              <div className='videoSurvey' key={i}>
                 <p>{video.title}<DrawerExample data={video} /></p>
               </div>
             ))}
@@ -88,7 +98,7 @@ const Survey = () => {
           <h2>Images</h2>
           <div className="iBlock">
             {image?.map((img: any, i: number) => (
-              <div className='imgSurvey'>
+              <div className='imgSurvey' key={i}>
                 <p>{img.title}<DrawerExample data={img} /></p>
               </div>
             ))}

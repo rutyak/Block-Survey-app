@@ -21,8 +21,11 @@ const VideoRes = () => {
     const [videoA, setVideoA] = useState<videoAnsType[]>()
 
     useEffect(() => {
-        axios.get(`${BaseUrl}/videoAnsData`).then(res => setVideoA(res.data.data))
-    }, [])
+        (async function fetch(){
+          const res = await axios.get(`${BaseUrl}/videoAnsData`);
+          setVideoA(res.data.data)
+        })()
+      }, [])
 
     return (
         <div className='videores-container'>

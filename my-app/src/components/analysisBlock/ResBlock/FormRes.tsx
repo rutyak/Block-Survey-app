@@ -21,7 +21,10 @@ const FormRes = () => {
   const [formA, setFormA] = useState<formAnsType[]>()
 
   useEffect(() => {
-    axios.get(`${BaseUrl}/formAnsData`).then(res => setFormA(res.data.data))
+    (async function fetch(){
+      const res = await axios.get(`${BaseUrl}/formAnsData`);
+      setFormA(res.data.data)
+    })()
   }, [])
 
   return (
