@@ -65,7 +65,7 @@
     }
 
     .video-img-from-res h1 {
-        margin-top: -6rem;
+        
         font-size: larger;
         color: chartreuse;
     }
@@ -103,7 +103,7 @@
     }
 
     .video-img-from-res h1 {
-        margin-top: -8rem;
+       
         font-size: large;
         color: chartreuse;
     }
@@ -111,14 +111,7 @@
 }
 
 @media screen and (max-width: 480px) {
-    .img-flex img {
-        width: 70%;
-    }
-
-    .img-flex {
-        align-items: center;
-        gap: 2rem;
-    }
+ 
 
     .video-img-from-res p {
         margin-left: 0%;
@@ -129,7 +122,7 @@
     }
 
     .video-img-from-res h1 {
-        margin-top: -9rem;
+       
         font-size: large;
         color: chartreuse;
     }

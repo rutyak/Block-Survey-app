@@ -50,7 +50,9 @@
 
 @media screen and (max-width: 991px) {
     .from-res {
-        margin-left: 20%;
+        margin: auto;
+        margin-top: 3rem;
+        width: 60%;
     }
 
 
@@ -79,7 +81,9 @@
 
 @media screen and (max-width: 780px) {
     .from-res {
-        margin-left: 15%;
+        margin: auto;
+        margin-top: 3rem;
+        width: 60%;
     }
 
 
@@ -106,9 +110,14 @@
 
 @media screen and (max-width: 480px) {
     .from-res {
-        margin-left: 5%;
+        margin: auto;
+        margin-top: 3rem;
+        width: 80%;
     }
-
+    
+    .nav {
+        width: 50%;
+    }
 
     .que-form b {
         margin-bottom: 0.3rem;
@@ -125,6 +134,10 @@
         font-size: large;
         color: chartreuse;
         margin-left: 10%;
+    }
+
+    .video-img-form-user-res-title h1 {
+        font-size: large;
     }
 
 }

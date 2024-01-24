@@ -33,36 +33,53 @@
     margin-right: 3rem;
     margin-bottom: 1rem;
 }
-/* .videoBlock{
-    width: 100%;
-    margin: auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 3rem;
-} */
 
- /* .videoBlock p{
-    border: 1px solid gray;
-    padding: 0.5rem;
-    padding-left: 0.8rem;
-    border-radius: 1rem;
-    background: #0b0e27;
-    color: #3ac67a;
-    height: 15%;
-    margin-right: 1rem;
-    margin-bottom: 1rem;
-}  */
 
-/* .formBlock, .videoBlock, .imageBlock{
-    width: 0rem;
+
+@media screen and (max-width: 991px) {
+
+    .video-img-from-res h1 {
+        font-size: x-large;
+    }
+
+    .img-section img {
+        width: 50%;
+    }
+
+    .video-img-from-res h1{
+        margin-top: 4rem;
+    }    
+
 }
 
-.videoBlock{
-    gap: 0.6rem;
+@media screen and (max-width: 780px) {
+
+    .video-img-from-res h1{
+        margin-top: 4rem;
+    }
+    
+
+    .videoResBlock {
+        flex-direction: column;
+    }
 }
 
-.formSurvey p, .imgSurvey p, .videoSurvey p{
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
-}  */
+@media screen and (max-width: 480px) {
+  
+    .video-img-from-res h1{
+        margin-top: 4rem;
+    }
+
+    .img-section{
+        gap: 5rem;
+    }
+
+    .img-section img {
+        width: 40%;
+    }
+    
+    .videoResBlock {
+        flex-direction: column;
+    }
+
+}

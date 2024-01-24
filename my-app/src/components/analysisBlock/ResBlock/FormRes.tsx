@@ -27,7 +27,7 @@ const FormRes = () => {
   return (
     <div className='videores-container'>
       <Navbar />
-      <div className='videores' data-testid='videores'>
+      <div className='videores' data-testid='formres'>
         <div className='videores-title'>
           <h1>Survey Resonses !!</h1>
         </div>
