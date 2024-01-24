@@ -10,7 +10,7 @@ const Form = () => {
 
   const param = useParams();
   const formId = param.formId;
-
+  const name = param.name;
   type ansType = {
     que: string,
     ans: string
@@ -41,10 +41,7 @@ const Form = () => {
 
   useEffect(() => {
     try {
-      axios.get(`${BaseUrl}/formAnsData`).then(response => {
-        setFormA(response.data.data)
-        console.log("anaForm", response.data.data);
-      })
+      axios.get(`${BaseUrl}/formAnsData`).then(response => setFormA(response.data.data))
     } catch (error) {
       console.log(error)
     }
@@ -63,28 +60,22 @@ const Form = () => {
         <div className="from-res">
           {
             formA?.map((form: formType, i: number) => (
-              formId === form.title ?(
-                  <div key={i}>
-                    <div>
-                      <b className="response">Response by : {form.name}</b>
-                    </div>
-                    {form.answer?.map((survey: ansType, j: number) => (
-                      <div key={i} >
-                        <div className="ques-survey">
-                          <div className="que-form">
-                            <b>{survey.que ? j + 1. : ''} {survey.que}</b>
-                          </div>
-                          <div className="ans-form">
-                            <p>{survey.ans + '  '}</p>
-                          </div>
-                        </div>
+              formId === form.title && name === form.name? (
+                form.answer?.map((survey: any, j: number)=>(
+                  <div key={i} >
+                    <div className="ques-survey">
+                      <div className="que-form">
+                        <b>{survey.que ? j + 1. : ''} {survey.que}</b>
                       </div>
-                    ))}
+                      <div className="ans-form">
+                        <p>{survey.ans + '  '}</p>
+                      </div>
+                    </div>
                   </div>
-                ): ''
-             ))
+                )
+            )): ''
+          ))
           }
-
         </div>
       </div>
     </div>

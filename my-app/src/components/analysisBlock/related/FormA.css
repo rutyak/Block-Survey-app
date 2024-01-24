@@ -3,7 +3,6 @@
     padding: 1.5rem;
     border-radius: 1rem;
     display: flex;
-    height: 90%;
     flex-direction: column;
     width: 52%;
     margin: auto;
@@ -11,6 +10,7 @@
     overflow: auto;
     margin-left: 25%;
     background: darkcyan;
+    padding-left: 4rem;
 }
 
 .response{

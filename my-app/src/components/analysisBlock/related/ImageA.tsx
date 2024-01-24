@@ -10,7 +10,7 @@ const Image = () => {
 
   const param = useParams();
   const imageId = param.imageId;
-
+  const name = param.name;
   type ansType = {
     img1: string,
     img2: string
@@ -42,26 +42,21 @@ const Image = () => {
           <h1>User response on images!!</h1>
         </div>
         <div className='video-res-container'>
-        {
-          imageA?.map((img: imageType, i: number) => (
-            img.title === imageId ? (
-                <div key={i} className="new-img-flex">
-                  <div>
-                    <b className="response">Response by : {img.name}</b>
+          {
+            imageA?.map((img: imageType, i: number) => (
+              img.title === imageId && name === img.name ? (
+                <div key={i} className="img-desc">
+                  <div className='img-section'>
+                    <img src={img.answer[0].img1} alt="img1" />
+                    <img src={img.answer[0].img2} alt="img1" />
                   </div>
                   <div>
-                    <div className="img-flex">
-                      <img src={img.answer[0].img1} alt="img1" />
-                      <img src={img.answer[0].img2} alt="img1" />
-                    </div>
-                    <div>
-                      <p>User Like This Images</p>
-                    </div>
+                    <p>{img.name} Like This Images</p>
                   </div>
                 </div>
-            ) : ''
-          ))
-        }
+              ) : ''
+            ))
+          }
         </div>
       </div>
     </div>

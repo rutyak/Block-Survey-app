@@ -14,20 +14,10 @@
 
 }
 
-.video-flex .res{
-    margin-bottom: 1rem;
-}
-
-
-
 .video-res-container{
     height: 85%;
     margin-top: 3rem;
     overflow: auto;
-}
-
-.video-flex{
-    margin-bottom: 4rem;
 }
 
 .video-img-from-res h1 {
@@ -39,6 +29,7 @@
     border-radius: 1rem;
     margin-top: 0.8rem;
     margin: auto;
+    margin-bottom: 2rem;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 

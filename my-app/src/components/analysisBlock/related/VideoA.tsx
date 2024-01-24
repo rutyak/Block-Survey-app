@@ -10,6 +10,7 @@ const Video = () => {
 
   const param = useParams();
   const videoId = param.videoId;
+  const name = param.name;
   console.log("videoId: ", videoId)
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [start, setStart] = useState<string>();
@@ -80,17 +81,12 @@ const Video = () => {
         <div className='video-res-container'>
           {
             videoA?.map((video: videoAType, i: number) => (
-              video.title.trim() === videoId?.trim() ? (
-                <div key={i} className='video-flex'>
-                  <div className='res'>
-                    <b className="response">Response by : {video.name}</b>
-                  </div>
-                  <div key={i}>
-                    <video ref={videoRef} width="450px" controls onPlay={() => handleAnswer(video.answer[0].start, video.answer[0].end)}>
+              video.title.trim() === videoId?.trim() && name === video.name? (
+                <div key={i}>
+                    <video ref={videoRef} width="550px" controls onLoadedData={() => handleAnswer(video.answer[0].start, video.answer[0].end)}>
                       <source src={video.videoUrl} type={`video/${video.videoType}`} />
                     </video>
-                    <p>User Like The Video From {video.answer[0].start}s to {video.answer[0].end}s</p>
-                  </div>
+                    <p>{video.name} Like The Video From {video.answer[0].start}s to {video.answer[0].end}s</p>
                 </div>
               ) : ''
             )
