@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Entry from '../Entry/Entry';
 import './Video.css'
 import Navbar from '../Navbar/Navbar';
 import { toast } from 'react-toastify';
@@ -30,7 +29,7 @@ const Video = () => {
     title: '',
     desc: '',
   });
-  console.log(titleDesc);
+
 
   const [file, setFile] = useState<any>()
   const [type, setType] = useState<string>('')
@@ -39,11 +38,10 @@ const Video = () => {
   function handleSurveyToggle() {
     setBtn({ ...btn, addVideoSurvey: true, createBtn: false});
   }
-  console.log("fileType: ",file);
 
   async function handelSubmit(){
     try {
-      console.log("Handle Submit clicked")
+      console.log("Video Submit clicked")
       const formData = new FormData();
       formData.append('file',file);
       formData.append('title',titleDesc.title);
@@ -52,11 +50,9 @@ const Video = () => {
       formData.append('videoType',type);
       formData.append('stage','');
       formData.append('answer',JSON.stringify([]));
-      
-      console.log("FormData: ",formData)
+     
       try {
         const res = await axios.post(`${BaseUrl}/videos/upload`,formData)
-        console.log("videoSurvey: ",res.data);
         if(res.status===200){
           toast.success("Survey uploaded successfully!!")
       }
@@ -76,10 +72,7 @@ const Video = () => {
     <div className='videoContainer'>
       <Navbar/>
       <div className='video-container' data-testid='video-container'>
-      {btn.createBtn && 
-      <Entry handleSurveyToggle={handleSurveyToggle} btnTitle={"Create Video Survey"}/>
-      }
-      { btn.addVideoSurvey &&
+     
         <div className='form-video'>
            <h2>Video Survey Creation</h2>
            <input 
@@ -95,12 +88,13 @@ const Video = () => {
            onChange={(e:React.ChangeEvent<HTMLInputElement>)=>setTitleDesc({...titleDesc, desc: e.target.value})}
            /><br />
           
-           <label htmlFor="upload">Upload video:</label><br />
-           {file &&
-              <video width="320" height="240" controls>
+           {file? (
+              <video title='video-tag' width="320" height="240" controls>
                  <source src={URL.createObjectURL(file)} type={`video/${type}`} />
               </video>
+             ): ''
            }
+           <label htmlFor="upload">Upload video:</label><br />
        {  disable &&
         <input 
            type='file'
@@ -121,7 +115,7 @@ const Video = () => {
            />}<br />
            <button onClick={handelSubmit}>Submit</button>
         </div>
-      }
+      
       </div>
     </div>
   )

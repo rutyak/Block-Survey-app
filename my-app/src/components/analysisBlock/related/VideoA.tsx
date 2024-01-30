@@ -65,8 +65,19 @@ const Video = () => {
   const [videoA, setVideoA] = useState<videoAType[]>()
 
   useEffect(() => {
-    axios.get(`${BaseUrl}/videoAnsData`).then(response => setVideoA(response.data.data))
-  }, [])
+    (async function fetch(){
+      try {
+        const res = await axios.get(`${BaseUrl}/videoAnsData`);
+        if (res.data && res.data.data) {
+          setVideoA(res.data.data);
+        } else {
+          console.error("Invalid response structure:", res);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    })()
+  },[])
 
   console.log("anaVideo", videoA)
 

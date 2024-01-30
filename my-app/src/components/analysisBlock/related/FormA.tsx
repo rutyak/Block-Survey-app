@@ -41,7 +41,18 @@ const Form = () => {
 
   useEffect(() => {
     try {
-      axios.get(`${BaseUrl}/formAnsData`).then(response => setFormA(response.data.data))
+      (async function fetch(){
+        try {
+          const res = await axios.get(`${BaseUrl}/formAnsData`);
+          if (res.data && res.data.data) {
+            setFormA(res.data.data);
+          } else {
+            console.error("Invalid response structure:", res);
+          }
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      })()
     } catch (error) {
       console.log(error)
     }

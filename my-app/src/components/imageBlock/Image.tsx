@@ -1,5 +1,4 @@
-import React, { ChangeEvent, useState } from 'react'
-import Entry from '../Entry/Entry'      
+import React, { ChangeEvent, useState } from 'react' 
 import '../videoBlock/Video.css'
 import Navbar from "../Navbar/Navbar"
 import './Image.css'
@@ -82,12 +81,7 @@ const Image = () => {
     return  (
         <div className='videoContainer'>
             <Navbar/>
-            <div className='video-container' data-testid='image-container'>
-            {btn.createBtn &&
-                <Entry handleSurveyToggle={handleSurveyToggle} btnTitle={"Create Image Survey"} />
-            }
-
-            { btn.addImageSurvey &&
+            <div className='video-container' data-testid='image-container'>  
             <div className='form-video'>
                 <h2>Image Survey Creation</h2>
                 <input type='text' 
@@ -101,27 +95,29 @@ const Image = () => {
                 />
                 <label htmlFor="upload">Upload Image(max 4):</label>
                 <div className='img-container'>
-                { img.length > 0 &&
-                  img.map((ele: File,index: number)=>{
-                    try {
-                       return (
-                        <div key={index}>
-                        <img className='survey-img' src={URL.createObjectURL(ele)} alt="img" />
-                        <button className='img-remove-btn' onClick={()=>{
-                           setImg(img.filter((_, i:number)=> i!==index))
-                           setDisplay(true)
-                        }}
-                        >Remove</button>
-                        </div>
-                        )
-                    } catch (error) {
-                        console.log(error)
-                    }
-                  })
-                 }
+                { img.length? (
+                    img.map((ele: File,index: number)=>{
+                      try {
+                         return (
+                          <div key={index}>
+                          <img className='survey-img' title='image-tag' src={URL.createObjectURL(ele)} alt="img" />
+                          <button className='img-remove-btn' onClick={()=>{
+                             setImg(img.filter((_, i:number)=> i!==index))
+                             setDisplay(true)
+                          }}
+                          >Remove</button>
+                          </div>
+                          )
+                      } catch (error) {
+                          console.log(error)
+                      }
+                    }) 
+                  ): ''
+                }
                  </div>
                 { display &&
-                <input 
+                <input  
+                name='choose-img'
                 type='file'
                 accept='image/*' 
                 onChange={handleImg}
@@ -130,7 +126,7 @@ const Image = () => {
                    <button onClick={handleImgSubmit}>Submit</button>
                 </div>
             </div>
-            }
+        
             </div>
         </div>
     )

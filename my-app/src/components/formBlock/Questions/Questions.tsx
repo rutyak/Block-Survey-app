@@ -29,8 +29,7 @@ type entryTypes = {
 const Questions = ({ questions, heading, handleQuestions }: entryTypes) => {
     async function handleFormSubmit() {
       try {
-        console.log("HandleSubmit Click");
-
+       
         const postForm = {
           type: 'Survey',
           title: heading.title,
@@ -39,7 +38,7 @@ const Questions = ({ questions, heading, handleQuestions }: entryTypes) => {
           stage: '',
           answer: []
         };
-        console.log(postForm);
+     
         try {
           const res = await axios.post(`${BaseUrl}/forms`, postForm);
           if (res.status === 200) 
@@ -58,7 +57,7 @@ const Questions = ({ questions, heading, handleQuestions }: entryTypes) => {
   let no = -1;
   
   return (
-    <div className="questions">
+    <div className="questions" data-testid='questions'>
       {
         questions?.map((question: typeObj, index: number) => {
 
@@ -74,11 +73,11 @@ const Questions = ({ questions, heading, handleQuestions }: entryTypes) => {
                   return (
                     <div className="radio-check" key={optionIndex}>
                      {question.type === 'radio'? (
-                      <input className="radio-check-width" type="radio" placeholder="Option 1"/>
+                      <input className="radio-check-width" type="radio"/>
                       ):(
-                      <input className="radio-check-width" type="checkbox" placeholder="Option 2"/>
+                      <input className="radio-check-width" type="checkbox"/>
                       )}
-                      <input  type="text" placeholder="Enter your question?" onChange={(e) => handleQuestions(e, index, optionIndex)}/>
+                      <input  type="text" placeholder="Options" onChange={(e) => handleQuestions(e, index, optionIndex)}/>
                     </div>
                   )
                 })

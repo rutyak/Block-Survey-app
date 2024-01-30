@@ -11,7 +11,6 @@ import React from 'react'
 import './DrawerExample.css'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
-
 import { toast } from 'react-toastify'
 const BaseUrl = 'http://localhost:5000'
 
@@ -33,15 +32,14 @@ type dataType ={
 }
 
 export default function DrawerExample({data}: {data:dataType}) {
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const btnRef = React.useRef<any>(null)
-  console.log("data", data);
-
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = React.useRef<any>(null);
   const navigate = useNavigate();
  
   async function handlePublish(id: string){
-
-    console.log("id: ",id)
+     
+    console.log('Published !!')
+    
     switch(data.type){
       case 'Video':
         axios.put(`${BaseUrl}/updateVideo/${id}`,{stage:'published'}).then(res => res.status===200 ? toast.success('Published!'):'');
@@ -59,7 +57,7 @@ export default function DrawerExample({data}: {data:dataType}) {
 
   return (
     <>
-      <Button sx={{ width: "3rem", height: "1.5rem" }} ref={btnRef} colorScheme='teal' onClick={onOpen}>
+      <Button sx={{ width: "3rem", height: "1.5rem" }} ref={btnRef} data-testid="drawer-button" colorScheme='teal' onClick={onOpen}>
         Open
       </Button>
       <Drawer
@@ -73,7 +71,7 @@ export default function DrawerExample({data}: {data:dataType}) {
           <DrawerCloseButton />
 
           <DrawerBody>
-            <div className='drawer-main'>
+            <div className='drawer-main' >
               <div className='title-desc'>
                 <div className='title-drawer'>
                   <h3>Title<p style={{ marginLeft: "3.2rem" }}>: {data.title}</p></h3>

@@ -16,7 +16,7 @@ const imageAnswers = require('./routes/imageAnswers');
 const videoAnswers = require('./routes/videoAnswers');
 require('dotenv').config({path:'./.env'})
 
-mongoose.connect(process.env.mongoDB_URL || 'mongodb://localhost:27017')
+mongoose.connect('mongodb://localhost:27017')
  
 const connection = mongoose.connection;
  

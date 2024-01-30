@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import add from "../../Asset/addition.png";
 import plusSign from "../../Asset/plus.png";
 import "./Form.css";
-import Entry from "../Entry/Entry";
 import Questions from "./Questions/Questions";
 import Navbar from "../Navbar/Navbar";
 
 const Form = () => {
 
-  type btnType={
+  type btnType = {
     addBtn: boolean,
     addSurvey: boolean,
     removeAddSurvey: boolean
@@ -21,14 +20,14 @@ const Form = () => {
     }
   )
 
-  type typeObj ={
+  type typeObj = {
     type: string,
     question: string,
     options: string[] | string[][]
   }
-  const [questions, setQuestions] = useState<typeObj[]>([{ type:'', question: '', options: []}]);
+  const [questions, setQuestions] = useState<typeObj[]>([{ type: '', question: '', options: [] }]);
 
-  type headingType={
+  type headingType = {
     title: string,
     desc: string
   }
@@ -42,42 +41,37 @@ const Form = () => {
   }
 
   function handleSurveyToggle() {
-    setBtn({ ...btn,addSurvey: true, removeAddSurvey: false});
+    setBtn({ ...btn, addSurvey: true, removeAddSurvey: false });
   }
 
 
-  function handleQuestions(e: React.ChangeEvent<HTMLInputElement>, index: any, optionIndex: any){
-    
+  function handleQuestions(e: React.ChangeEvent<HTMLInputElement>, index: any, optionIndex: any) {
+
     const que = [...questions]; // que is object
     const object = que[index]; // creating index in array
-    if(optionIndex >= 0){
+    if (optionIndex >= 0) {
       object.options[optionIndex] = e.target.value;
     }
-    else{
+    else {
       object.question = e.target.value;
     }
   }
-  console.clear()
-  console.log("que: ",questions)
 
-  const addQuestion = (type : string)=>{
-    const options = (type !== 'single') ? ['',''] : []
+
+
+  const addQuestion = (type: string) => {
+    const options = (type !== 'single') ? ['', ''] : []
     setQuestions([
       ...questions,
-      { type : type, question:'', options: options}
+      { type: type, question: '', options: options }
     ])
     setBtn({ ...btn, addBtn: false });
   }
 
   return (
     <div className="formContainer">
-      <Navbar/>
+      <Navbar />
       <div className="form-container" data-testid='form-container'>
-      {btn.removeAddSurvey && 
-      <Entry handleSurveyToggle={handleSurveyToggle} btnTitle={"Create Survey"}/>
-      }
-      
-      {btn.addSurvey && (
         <div className="form-form">
           <h2>Survey Form Creation</h2>
           <div className="form">
@@ -111,37 +105,24 @@ const Form = () => {
               </label>
               <p>Add at least 5 questions</p>
             </form>
-            {heading.title !== "" && heading.desc !== "" && questions.length!==6 &&(
-              <div>
-                <img
-                  className="add-que"
-                  onClick={handleAdd}
-                  src={add}
-                  alt="add icon"
-                />
-              </div>
-            )}
+           
           </div>
-          { btn.addBtn && (
             <div className="questions-btn">
-              <button onClick={()=> addQuestion('single')}>
+              <button onClick={() => addQuestion('single')}>
                 <p>Add question</p>
                 <img src={plusSign} alt="addQue icon" />
               </button>
-              <button onClick={()=> addQuestion('radio')}>
+              <button onClick={() => addQuestion('radio')}>
                 <p>Add multi choice question</p>
                 <img src={plusSign} alt="addQue icon" />
               </button>
-              <button onClick={()=> addQuestion('checkbox')}>
+              <button onClick={() => addQuestion('checkbox')}>
                 <p>Add checkbox question</p>
                 <img src={plusSign} alt="addQue icon" />
               </button>
             </div>
-          )}
         </div>
-      )}
-      
-      <Questions questions={questions} heading={heading} handleQuestions={handleQuestions}/>
+        <Questions questions={questions} heading={heading} handleQuestions={handleQuestions} />
       </div>
     </div>
   );

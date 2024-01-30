@@ -29,9 +29,20 @@ const Image = () => {
   const [imageA, setImageA] = useState<imageType[]>();
 
   useEffect(() => {
-    axios.get(`${BaseUrl}/imageAnsData`).then(response => setImageA(response.data.data))
+    (async function fetch(){
+      try {
+        const res = await axios.get(`${BaseUrl}/imageAnsData`);
+        if (res.data && res.data.data) {
+          setImageA(res.data.data);
+        } else {
+          console.error("Invalid response structure:", res);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    })()
   }, [])
-  console.log("imgAns: ", imageA);
+ 
 
 
   return (

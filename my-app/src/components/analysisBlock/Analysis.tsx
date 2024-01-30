@@ -45,7 +45,7 @@ const Analysis = () => {
   }
 
   const navigate = useNavigate();
-  const [search, setSearch] = useState<any>('');
+  const [search, setSearch] = useState<string>('');
   const [video, setVideo] = useState<videoType[]>();
   const [image, setImage] = useState<imageType[]>();
   const [form, setForm] = useState<formType[]>();
@@ -56,9 +56,18 @@ const Analysis = () => {
 
 
   useEffect(() => {
-    axios.get(`${BaseUrl}/videoData`).then(response => setVideo(response.data.data))
-    axios.get(`${BaseUrl}/imageData`).then((response) => setImage(response.data.data))
-    axios.get(`${BaseUrl}/formData`).then((response) => setForm(response.data.data))
+    async function fetch(){
+      try {
+        const video = await axios.get(`${BaseUrl}/videoData`);
+        setVideo(video.data.data);
+        const image = await axios.get(`${BaseUrl}/imageData`);
+        setVideo(image.data.data);
+        const form = await axios.get(`${BaseUrl}/formData`);
+        setVideo(form.data.data);
+      } catch (error) {
+        console.log(error)
+      }
+    }
   }, [])
 
   console.log("vAns", video);
@@ -90,6 +99,7 @@ const Analysis = () => {
       <div className='analysis-container' data-testid='analysis-container'>
         <div className='search-part'>
           <input type='text'
+            name='name'
             className='search-block'
             placeholder='Search block survey...'
             value={search}
