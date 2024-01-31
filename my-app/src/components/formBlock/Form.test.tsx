@@ -28,11 +28,6 @@ it('Teesting Form fetching api', async () => {
     expect(mockData.data.title).toEqual(res.data.title);
 })
 
-// it('testing onClick button event',()=>{
-//     render(<MemoryRouter><Form/></MemoryRouter>);
-//     const title = screen.getByTitle('Add-que-img');
-//     expect(title).toBeInTheDocument();
-// })
 
 it('Testing Form inputs', () => {
     render(<MemoryRouter><Form /></MemoryRouter>);

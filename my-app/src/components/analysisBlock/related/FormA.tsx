@@ -50,7 +50,7 @@ const Form = () => {
             console.error("Invalid response structure:", res);
           }
         } catch (error) {
-          console.error("Error fetching data:", error);
+          console.log("Error fetching data:", error);
         }
       })()
     } catch (error) {

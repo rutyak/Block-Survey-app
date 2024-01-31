@@ -18,6 +18,7 @@
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "axios": "^1.6.5",
+    "axios-mock-adapter": "^1.22.0",
     "framer-motion": "^10.18.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -34,7 +35,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "coverage": "npm test -- --coverage"
+    "coverage": "npm test -- --coverage --watchAll --collectCoverageFrom='src/components/**/*.{ts,tsx}'"
   },
   "eslintConfig": {
     "extends": [
@@ -62,4 +63,5 @@
   "devDependencies": {
     "@babel/preset-react": "^7.23.3"
   }
+
 }

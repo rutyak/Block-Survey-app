@@ -8,7 +8,7 @@ type headingType={
   desc: string
 }
 
-type handleQuestions = (
+type handleQuestionsType = (
   e: React.ChangeEvent<HTMLInputElement>,
   index: number,
   optionIndex?: number
@@ -17,13 +17,13 @@ type handleQuestions = (
 type typeObj ={
   type: string,
   question: string,
-  options: string[] | string[][]
+  options: string[] | string[][] 
 }
 
 type entryTypes = {
   questions: typeObj[];
   heading: headingType;
-  handleQuestions: handleQuestions
+  handleQuestions: handleQuestionsType
 };
 
 const Questions = ({ questions, heading, handleQuestions }: entryTypes) => {
@@ -88,14 +88,14 @@ const Questions = ({ questions, heading, handleQuestions }: entryTypes) => {
         })
       }
 
-      {
-        questions.length === 6 && 
         <div className="form-submit-btn">
           <button className="submit-btn" onClick={handleFormSubmit}>Submit</button>
         </div>
-      }
+    
     </div>
   );
 };
-
+ 
 export default Questions;
+
+

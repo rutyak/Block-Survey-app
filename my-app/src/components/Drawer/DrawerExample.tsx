@@ -38,8 +38,6 @@ export default function DrawerExample({data}: {data:dataType}) {
  
   async function handlePublish(id: string){
      
-    console.log('Published !!')
-    
     switch(data.type){
       case 'Video':
         axios.put(`${BaseUrl}/updateVideo/${id}`,{stage:'published'}).then(res => res.status===200 ? toast.success('Published!'):'');
@@ -56,7 +54,7 @@ export default function DrawerExample({data}: {data:dataType}) {
   }
 
   return (
-    <>
+    <div data-testid='Drawer'>
       <Button sx={{ width: "3rem", height: "1.5rem" }} ref={btnRef} data-testid="drawer-button" colorScheme='teal' onClick={onOpen}>
         Open
       </Button>
@@ -68,7 +66,7 @@ export default function DrawerExample({data}: {data:dataType}) {
       >
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerCloseButton />
+          <DrawerCloseButton/>
 
           <DrawerBody>
             <div className='drawer-main' >
@@ -82,7 +80,7 @@ export default function DrawerExample({data}: {data:dataType}) {
               </div>
             { data.type === 'Video' &&
                 <div className="video-image">
-                <video width="320" height="240" controls>
+                <video data-testid='video-tag' width="320" height="240" controls>
                   <source src={data.videoUrl} type={`video/${data.videoType}`}/>
                 </video>
                 </div>
@@ -92,7 +90,7 @@ export default function DrawerExample({data}: {data:dataType}) {
             { data.type === 'Image' &&
                 data.imageFile?.map((ele: any, i: number)=>(
                   <div className="image-drawer" key={i}>
-                    <img src={ele} alt="img" />
+                    <img title='image-tag' src={ele} alt="img" />
                   </div>
                 ))
             }
@@ -107,6 +105,6 @@ export default function DrawerExample({data}: {data:dataType}) {
 
         </DrawerContent>
       </Drawer>
-    </>
+    </div>
   )
 }

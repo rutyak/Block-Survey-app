@@ -62,10 +62,6 @@ const Survey = () => {
     })()
   }, [])
 
-  console.log("vInfo", video);
-  console.log("iInfo", image);
-  console.log("fInfo", form);
-
 
 
   return (
