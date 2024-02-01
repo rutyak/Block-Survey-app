@@ -59,3 +59,14 @@ it('Testing Form submit button', async () => {
     expect(200).toEqual(res.data.status);
 
 })
+
+it('Testing submit button',()=>{
+    render(<MemoryRouter><Questions questions={[]} heading={{
+        title: "",
+        desc: ""
+    }} handleQuestions={function (e: ChangeEvent<HTMLInputElement>, index: number, optionIndex?: number | undefined): void {
+    } }/></MemoryRouter>);
+    const btn = screen.getByTestId('form-submit');
+    fireEvent.click(btn);
+    expect(screen.getByText('Please wait...')).toBeInTheDocument();
+})

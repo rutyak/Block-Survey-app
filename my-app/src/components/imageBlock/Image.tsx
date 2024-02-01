@@ -12,6 +12,8 @@ const Image = () => {
 
     const [img, setImg] = useState<File[]>([])
     const [display, setDisplay] = useState<boolean>(true);
+    const [submitMes, setSubmitMes] = useState<boolean>(false);
+    const [selected, setSelected] = useState<boolean>(false);
 
     interface BtnType{
         addVideoBtn: boolean,
@@ -40,6 +42,7 @@ const Image = () => {
     }
 
     function handleImg(e: ChangeEvent<HTMLInputElement>){
+        setSelected(true);
         let file = e.target.files;
     
         if(file && file.length > 0){
@@ -51,6 +54,7 @@ const Image = () => {
     }
     
     async function handleImgSubmit(){
+        setSubmitMes(true);
         try {
         const formData = new FormData();
         for(let i=0; i<img.length;i++){
@@ -117,14 +121,17 @@ const Image = () => {
                  </div>
                 { display &&
                 <input  
+                data-testid='image-choose'
                 name='choose-img'
                 type='file'
                 accept='image/*' 
                 onChange={handleImg}
                 />}
+                {selected ? <p style={{ color: '#755a5a', marginBottom: '0.5rem'}}>Image selected</p> : ''}
                 <div>
-                   <button onClick={handleImgSubmit}>Submit</button>
+                   <button data-testid='image-submit' onClick={handleImgSubmit}>Submit</button>
                 </div>
+                {submitMes ? <p style={{ color: 'green', marginTop: '1rem' }}>Please wait...</p> : ''}
             </div>
         
             </div>

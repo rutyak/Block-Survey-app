@@ -30,27 +30,6 @@ it('Testing Image post api',async()=>{
     expect(mockResponse.data.title).toEqual(res.data.title);
 })
 
-it('testing onClick button event',()=>{
-    render(<MemoryRouter><Image/></MemoryRouter>);
-    const text = screen.getByText(/Submit/i);
-    expect(text).toBeInTheDocument();
-})
-
-it('Checking choose img button', () => {
-    render(<MemoryRouter><Image/></MemoryRouter>);
-    
-    const input = screen.getByRole('button') as HTMLInputElement;
-    const file = new File(['content'], 'test.png', { type: 'image/*' });
-  
-    fireEvent.click(input, { target: { files: [file] } });
-  
-    if(input.files && input.files.length > 0){
-        expect(input.files[0]).toStrictEqual(file);
-    }
-    else{
-        console.log("Empty file");
-    }
-});
 
 it('Testing inputs',()=>{
     render(<MemoryRouter><Image/></MemoryRouter>);
@@ -58,4 +37,19 @@ it('Testing inputs',()=>{
     const inputBox2 = screen.getByPlaceholderText('Description');
     expect(inputBox1).toBeInTheDocument();
     expect(inputBox2).toBeInTheDocument();
+})
+
+it('Checking choose image button', () => {
+    render(<MemoryRouter><Image/></MemoryRouter>);
+    const input = screen.getByTestId('image-choose');
+    fireEvent.change(input);
+    expect(screen.getByText('Image selected')).toBeInTheDocument();
+
+  });
+
+it('Testing submit button',()=>{
+    render(<MemoryRouter><Image/></MemoryRouter>);
+    const btn = screen.getByTestId('image-submit');
+    fireEvent.click(btn);
+    expect(screen.getByText('Please wait...')).toBeInTheDocument();
 })

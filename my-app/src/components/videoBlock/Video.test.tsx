@@ -17,8 +17,6 @@ it('Testing video post api and Submit button',async()=>{
     axios.post = jest.fn().mockResolvedValue(mockResponse);
 
     render(<MemoryRouter><Video/></MemoryRouter>);
-    const btn = screen.getByText('Submit');
-    fireEvent.click(btn);
     
     const res = await axios.post(`${BaseUrl}/videos/upload`);
     expect(mockResponse.data.name).toEqual(res.data.name);
@@ -48,18 +46,18 @@ it('Checking choose video button', () => {
 
     render(<MemoryRouter><Video/></MemoryRouter>);
     
-    const input = screen.getByRole('button') as HTMLInputElement;
-    const file = 'left-arrow.png'
-    
-    fireEvent.click(input, { target: { files: [file] } });
-  
-    if(input.files && input.files.length > 0){
-        expect(input.files[0]).toStrictEqual(file);
-    }
-    else{
-        console.log("Empty file");
-    }
+    const input = screen.getByTestId('video-choose');
+    fireEvent.change(input);
+    expect(screen.getByText('Video selected')).toBeInTheDocument();
+
   });
+
+it('Testing submit button',()=>{
+    render(<MemoryRouter><Video/></MemoryRouter>);
+    const btn = screen.getByTestId('video-submit');
+    fireEvent.click(btn);
+    expect(screen.getByText('Please wait...')).toBeInTheDocument();
+})
 
 
 

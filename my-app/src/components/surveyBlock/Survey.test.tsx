@@ -14,19 +14,6 @@ it('testing survey component rendering',()=>{
 })
 
 
-// it('Testing video get api',async()=>{
-    
-//     const mockResponse = {
-//         data: {
-//             title: 'Nature',
-//             name: 'rutik'
-//         }
-//     }
-//     axios.get = jest.fn().mockResolvedValue(mockResponse);
-//     const res = await axios.get(`${BaseUrl}/videoData`);
-//     expect(mockResponse.data.name).toEqual(res.data.name);
-//     expect(mockResponse.data.title).toEqual(res.data.title);
-// })
 
 it('Testing Image get api',async()=>{
     
@@ -42,16 +29,3 @@ it('Testing Image get api',async()=>{
     expect(mockResponse.data.data.title).toEqual(res.data.data.title);
 })
 
-// it('Testing form get api',async()=>{
-    
-//     const mockResponse = {
-//         data: {
-//             title: 'Nature',
-//             name: 'rutik'
-//         }
-//     }
-//     axios.get = jest.fn().mockResolvedValue(mockResponse);
-//     const res = await axios.get(`${BaseUrl}/formData`);
-//     expect(mockResponse.data.name).toEqual(res.data.name);
-//     expect(mockResponse.data.title).toEqual(res.data.title);
-// })

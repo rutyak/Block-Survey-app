@@ -40,32 +40,24 @@ it('Testing Form inputs', () => {
 describe('Question Input testing', () => {
     it('Testing single Question', () => {
         render(<MemoryRouter><Form /></MemoryRouter>);
-
-        const addButton = screen.getByText('Add question');
+        const addButton = screen.getByTestId('Add question');
         fireEvent.click(addButton);
-
-        const inputBox = screen.getByPlaceholderText('Enter your question?');
-        expect(inputBox).toBeInTheDocument();
+        expect(screen.getByPlaceholderText('Enter your question?')).toBeInTheDocument();
     })
 
     it('Testing Multiple Question', () => {
         render(<MemoryRouter><Form/></MemoryRouter>);
 
-        const addMultiButton = screen.getByText('Add multi choice question');
+        const addMultiButton = screen.getByTestId('Add multi choice question');
         fireEvent.click(addMultiButton);
-
-        const inputBox = screen.getByPlaceholderText('Enter your question?');
-        expect(inputBox).toBeInTheDocument();
+        expect(screen.getByPlaceholderText('Enter your question?')).toBeInTheDocument();
     })
 
     it('Testing checkbox Question', () => {
         render(<MemoryRouter><Form/></MemoryRouter>);
 
-        const addCheckButton = screen.getByText('Add checkbox question');
+        const addCheckButton = screen.getByTestId('Add checkbox question');
         fireEvent.click(addCheckButton);
-
-        const inputBox = screen.getByPlaceholderText('Enter your question?');
-        expect(inputBox).toBeInTheDocument();
-        
+        expect(screen.getByPlaceholderText('Enter your question?')).toBeInTheDocument();
     }) 
 })

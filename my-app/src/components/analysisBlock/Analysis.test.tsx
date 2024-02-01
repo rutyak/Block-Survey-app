@@ -26,3 +26,10 @@ it("OnChange event testing",()=>{
 })
 
 
+
+// it('Testing video blocks and handles click', () => {
+
+//     render(<MemoryRouter><Analysis/></MemoryRouter>);
+//     const videoBlocks = screen.getAllByTestId(/video-\d+/);
+//     expect(videoBlocks.length).toBeGreaterThan(0);
+// });

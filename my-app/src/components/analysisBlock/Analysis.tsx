@@ -56,18 +56,18 @@ const Analysis = () => {
 
 
   useEffect(() => {
-    async function fetch(){
+    (async function fetch(){
       try {
         const video = await axios.get(`${BaseUrl}/videoData`);
         setVideo(video.data.data);
         const image = await axios.get(`${BaseUrl}/imageData`);
-        setVideo(image.data.data);
+        setImage(image.data.data);
         const form = await axios.get(`${BaseUrl}/formData`);
-        setVideo(form.data.data);
+        setForm(form.data.data);
       } catch (error) {
         console.log(error)
       }
-    }
+    })()
   }, [])
 
   console.log("vAns", video);
@@ -112,7 +112,7 @@ const Analysis = () => {
             <div className="fBlock">
               {(search? filteredForm : form)?.map((form: any, i: number) => (
                 form.status === 'Answered' ?(
-                <div className='formSurvey' onClick={() => navigate(`/form/${form.title}`)}>
+                <div data-testid={`form-${i}`} className='formSurvey' onClick={() => navigate(`/form/${form.title}`)}>
                   <p>{form.title}</p>
                 </div>
                 ) : ''
@@ -124,7 +124,7 @@ const Analysis = () => {
             <div className="vBlock">
               {(search ? filteredVideo : video)?.map((video: any, i: number) => (
                 video.status === 'Answered' ?(
-                <div className='videoSurvey' onClick={() => navigate(`/video/${video.title}`)}>
+                <div data-testid={`video-${i}`} className='videoSurvey' onClick={() => navigate(`/video/${video.title}`)}>
                   <p>{video.title}</p>
                 </div>
                 ) : ''
@@ -136,7 +136,7 @@ const Analysis = () => {
             <div className="iBlock">
               {(search ? filteredImage : image)?.map((img: any, i: number) => (
                 img.status === 'Answered' ?(
-                <div className='imgSurvey' onClick={() => navigate(`/image/${img.title}`)}>
+                <div data-testid={`image-${i}`} className='imgSurvey' onClick={() => navigate(`/image/${img.title}`)}>
                   <p>{img.title}</p>
                 </div>
                 ) : ''

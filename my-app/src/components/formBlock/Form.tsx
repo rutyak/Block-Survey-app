@@ -108,15 +108,15 @@ const Form = () => {
            
           </div>
             <div className="questions-btn">
-              <button onClick={() => addQuestion('single')}>
+              <button data-testid='Add question' onClick={() => addQuestion('single')}>
                 <p>Add question</p>
                 <img src={plusSign} alt="addQue icon" />
               </button>
-              <button onClick={() => addQuestion('radio')}>
+              <button data-testid='Add multi choice question' onClick={() => addQuestion('radio')}>
                 <p>Add multi choice question</p>
                 <img src={plusSign} alt="addQue icon" />
               </button>
-              <button onClick={() => addQuestion('checkbox')}>
+              <button data-testid='Add checkbox question' onClick={() => addQuestion('checkbox')}>
                 <p>Add checkbox question</p>
                 <img src={plusSign} alt="addQue icon" />
               </button>

@@ -23,6 +23,7 @@ const VideoRes = () => {
     useEffect(() => {
         (async function fetch(){
           const res = await axios.get(`${BaseUrl}/videoAnsData`);
+          console.log("viddeores: ",res.data.data)
           setVideoA(res.data.data)
         })()
       }, [])

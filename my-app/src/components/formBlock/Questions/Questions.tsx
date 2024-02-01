@@ -1,6 +1,7 @@
 import "./Questions.css";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useState } from "react";
 const BaseUrl = 'http://localhost:5000';
 
 type headingType={
@@ -27,7 +28,11 @@ type entryTypes = {
 };
 
 const Questions = ({ questions, heading, handleQuestions }: entryTypes) => {
+
+  const [submitMes, setSubmitMes] = useState<boolean>(false);
+
     async function handleFormSubmit() {
+      setSubmitMes(true);
       try {
        
         const postForm = {
@@ -77,7 +82,7 @@ const Questions = ({ questions, heading, handleQuestions }: entryTypes) => {
                       ):(
                       <input className="radio-check-width" type="checkbox"/>
                       )}
-                      <input  type="text" placeholder="Options" onChange={(e) => handleQuestions(e, index, optionIndex)}/>
+                      <input data-testid='opt'  type="text" placeholder="Options" onChange={(e) => handleQuestions(e, index, optionIndex)}/>
                     </div>
                   )
                 })
@@ -87,10 +92,10 @@ const Questions = ({ questions, heading, handleQuestions }: entryTypes) => {
           )
         })
       }
-
         <div className="form-submit-btn">
-          <button className="submit-btn" onClick={handleFormSubmit}>Submit</button>
+          <button data-testid='form-submit' className="submit-btn" onClick={handleFormSubmit}>Submit</button>
         </div>
+        {submitMes ? <p style={{ color: 'green', marginTop: '0.3rem', textAlign: 'center' }}>Please wait...</p> : ''}
     
     </div>
   );

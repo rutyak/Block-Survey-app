@@ -7,7 +7,7 @@ import {
   Button,
   useDisclosure
 } from '@chakra-ui/react'
-import React from 'react'
+import React, { useState } from 'react'
 import './DrawerExample.css'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
@@ -32,12 +32,15 @@ type dataType ={
 }
 
 export default function DrawerExample({data}: {data:dataType}) {
+
+  const [publish, setPublish] = useState<boolean>()
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef<any>(null);
   const navigate = useNavigate();
  
   async function handlePublish(id: string){
-     
+    
+    setPublish(true);
     switch(data.type){
       case 'Video':
         axios.put(`${BaseUrl}/updateVideo/${id}`,{stage:'published'}).then(res => res.status===200 ? toast.success('Published!'):'');
@@ -55,7 +58,7 @@ export default function DrawerExample({data}: {data:dataType}) {
 
   return (
     <div data-testid='Drawer'>
-      <Button sx={{ width: "3rem", height: "1.5rem" }} ref={btnRef} data-testid="drawer-button" colorScheme='teal' onClick={onOpen}>
+      <Button data-testid="drawer-button" sx={{ width: "3rem", height: "1.5rem" }} ref={btnRef}  colorScheme='teal' onClick={onOpen}>
         Open
       </Button>
       <Drawer
@@ -96,7 +99,10 @@ export default function DrawerExample({data}: {data:dataType}) {
             }
 
               <div className='publish-analytics-btn'>
-                <Button className='publish' onClick={()=>handlePublish(data._id)}>Publish</Button>
+                <div>
+                  <Button className='publish' onClick={()=>handlePublish(data._id)}>Publish</Button>
+                  { publish? <p style={{color:'brown', fontSize:'smaller', marginTop:'0.3rem'}}>Published!!</p>:''}
+                </div>
                 <Button className='analytics' onClick={()=>navigate('./analysis')}>Analytics</Button>
               </div>
             </div>
