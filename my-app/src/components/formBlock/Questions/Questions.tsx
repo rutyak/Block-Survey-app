@@ -41,7 +41,6 @@ const Questions = ({ questions, heading, handleQuestions }: entryTypes) => {
           desc: heading.desc,
           questions: questions,
           stage: '',
-          answer: []
         };
      
         try {

@@ -18,27 +18,33 @@ const VideoRes = () => {
             end: string
         }]
     }
-    const [videoA, setVideoA] = useState<videoAnsType[]>()
+    const [videoAns, setVideoAns] = useState<videoAnsType[]>()
 
     useEffect(() => {
-        (async function fetch(){
-          const res = await axios.get(`${BaseUrl}/videoAnsData`);
-          console.log("viddeores: ",res.data.data)
-          setVideoA(res.data.data)
+        (async function fetch() {
+            try {
+                const res = await axios.get(`${BaseUrl}/videoAnsData`);
+                console.log("viddeores: ", res.data.data);
+                setVideoAns(res.data.data)
+            } catch (error) {
+                console.log(error)
+            }
         })()
-      }, [])
+    }, [])
+
+    // console.log('videoAns',videoAns)
 
     return (
         <div className='videores-container'>
             <Navbar />
             <div className='videores' data-testid='videores'>
                 <div className='videores-title'>
-                    <h1>Video Survey Resonses !!</h1>
+                    <h1>Video Survey Responses !!</h1>
                 </div>
                 <div className='videoResBlock'>
-                    {videoA?.map((video: videoAnsType, i: number) => (
+                    {videoAns?.map((video: videoAnsType, i: number) => (
                         video.title.trim() === videoId?.trim() ? (
-                            <div className='videoRes' onClick={() => navigate(`/videores/${video.title}/${video.name}`)}>
+                            <div className='videoRes' data-testid='videoRes-tag' onClick={() => navigate(`/videores/${video.title}/${video.name}`)}>
                                 <p>{video.title} <br /> Response by: {video.name}</p>
                             </div>
                         ) : ''

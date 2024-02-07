@@ -23,21 +23,24 @@ const FormRes = () => {
   useEffect(() => {
     (async function fetch(){
       const res = await axios.get(`${BaseUrl}/formAnsData`);
+      console.log(res.data.data);
       setFormA(res.data.data)
     })()
   }, [])
+
+  console.log('formA: ',formA);
 
   return (
     <div className='videores-container'>
       <Navbar />
       <div className='videores' data-testid='formres'>
         <div className='videores-title'>
-          <h1>Survey Resonses !!</h1>
+          <h1>Survey Responses !!</h1>
         </div>
         <div className='videoResBlock'>
           {formA?.map((form: any, i: number) => (
             form.title === formId ? (
-              <div className='videoRes' onClick={() => navigate(`/formres/${form.title}/${form.name}`)}>
+              <div className='videoRes' data-testid='formRes-tag' onClick={() => navigate(`/formres/${form.title}/${form.name}`)}>
                 <p>{form.title}<br /> Response by: {form.name}</p>
               </div>
             ) : ''

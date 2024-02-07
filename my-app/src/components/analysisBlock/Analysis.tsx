@@ -109,7 +109,7 @@ const Analysis = () => {
         </div>
         <div className='blocks'>
           <div className='formBlock'>
-            <div className="fBlock">
+            <div className="fBlock" data-testid='fBlock'>
               {(search? filteredForm : form)?.map((form: any, i: number) => (
                 form.status === 'Answered' ?(
                 <div data-testid={`form-${i}`} className='formSurvey' onClick={() => navigate(`/form/${form.title}`)}>
@@ -121,7 +121,7 @@ const Analysis = () => {
             </div>
           </div>
           <div className='videoBlock'>
-            <div className="vBlock">
+            <div className="vBlock" data-testid='vBlock'>
               {(search ? filteredVideo : video)?.map((video: any, i: number) => (
                 video.status === 'Answered' ?(
                 <div data-testid={`video-${i}`} className='videoSurvey' onClick={() => navigate(`/video/${video.title}`)}>
@@ -133,7 +133,7 @@ const Analysis = () => {
 
           </div>
           <div className='imageBlock'>
-            <div className="iBlock">
+            <div className="iBlock" data-testid='iBlock'>
               {(search ? filteredImage : image)?.map((img: any, i: number) => (
                 img.status === 'Answered' ?(
                 <div data-testid={`image-${i}`} className='imgSurvey' onClick={() => navigate(`/image/${img.title}`)}>

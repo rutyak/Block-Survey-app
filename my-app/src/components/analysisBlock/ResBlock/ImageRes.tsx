@@ -22,22 +22,28 @@ const ImageRes = () => {
 
   useEffect(() => {
     (async function fetch(){
-      const res = await axios.get(`${BaseUrl}/imageAnsData`);
-      setImageA(res.data.data)
+      try {
+        const res = await axios.get(`${BaseUrl}/imageAnsData`);
+        setImageA(res.data.data) 
+      } catch (error) {
+        console.log(error);
+      }
     })()
   }, [])
+
+  console.log('imageeAns: ',imageA)
 
   return (
     <div className='videores-container'>
       <Navbar />
       <div className='videores' data-testid='imageres'>
         <div className='videores-title'>
-          <h1>Image Survey Resonses !!</h1>
+          <h1>Image Survey Responses !!</h1>
         </div>
         <div className='videoResBlock'>
           {imageA?.map((img: any, i: number) => (
             img.title.trim() === imageId?.trim() ? (
-              <div className='videoRes' onClick={() => navigate(`/imageres/${img.title}/${img.name}`)}>
+              <div className='videoRes' data-testid='imageRes-tag' onClick={() => navigate(`/imageres/${img.title}/${img.name}`)}>
                 <p>{img.title}<br /> Response by: {img.name}</p>
               </div>
             ) : ''

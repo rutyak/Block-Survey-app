@@ -64,7 +64,7 @@ const Image = () => {
         formData.append('desc',titDesc.desc);
         formData.append('type','Image');
         formData.append('stage','');
-        formData.append('answer',JSON.stringify([]));
+       
         try {
            const res = await axios.post(`${BaseUrl}/images`, formData);
            if(res.status===200){
@@ -97,7 +97,6 @@ const Image = () => {
                 placeholder='Description' 
                 onChange={(e:React.ChangeEvent<HTMLInputElement>)=>setTitDesc({...titDesc, desc: e.target.value})}
                 />
-                <label htmlFor="upload">Upload Image(max 4):</label>
                 <div className='img-container'>
                 { img.length? (
                     img.map((ele: File,index: number)=>{
@@ -120,13 +119,18 @@ const Image = () => {
                 }
                  </div>
                 { display &&
-                <input  
-                data-testid='image-choose'
-                name='choose-img'
-                type='file'
-                accept='image/*' 
-                onChange={handleImg}
-                />}
+                <div>
+                    <label htmlFor='images'>Upload Images(max4):</label>
+                    <input  
+                    data-testid='image-choose'
+                    id='images'
+                    name='choose-img'
+                    type='file'
+                    accept='image/*' 
+                    onChange={handleImg}
+                    />
+                </div>
+                }
                 {selected ? <p style={{ color: '#755a5a', marginBottom: '0.5rem'}}>Image selected</p> : ''}
                 <div>
                    <button data-testid='image-submit' onClick={handleImgSubmit}>Submit</button>

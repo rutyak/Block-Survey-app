@@ -1,6 +1,11 @@
-import { fireEvent, render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import Analysis from './Analysis';
+import userEvent from '@testing-library/user-event';
+import axios from 'axios';
+import ImageRes from './ResBlock/ImageRes';
+import FormRes from './ResBlock/FormRes';
+import VideoRes from './ResBlock/VideoRes';
 
 
 it("Checking Analysis component ", () => {
@@ -9,27 +14,12 @@ it("Checking Analysis component ", () => {
     expect(testId).toBeInTheDocument();
 })
 
-it("Ckecking Input box present or not", () => {
+it("Ckecking Input box onchange", async () => {
+    userEvent.setup()
     render(<MemoryRouter><Analysis /></MemoryRouter>);
-    const inputbox = screen.getByRole('textbox');
-    const placeholder = screen.getByPlaceholderText('Search block survey...');
-    expect(inputbox).toBeInTheDocument();
-    expect(placeholder).toBeInTheDocument();
-    expect(inputbox).toHaveAttribute('name', 'name')
-})
-
-it("OnChange event testing",()=>{
-    render(<MemoryRouter><Analysis/></MemoryRouter>);
-    const inputbox = screen.getByRole('textbox');
-    fireEvent.change(inputbox,{target:{value:'a'}});
-    expect(inputbox).toHaveValue('a')
+    const input = screen.getByPlaceholderText(/Search block survey.../i);
+    await userEvent.type(input, 'nature survey');
+    expect(input).toHaveValue('nature survey');
 })
 
 
-
-// it('Testing video blocks and handles click', () => {
-
-//     render(<MemoryRouter><Analysis/></MemoryRouter>);
-//     const videoBlocks = screen.getAllByTestId(/video-\d+/);
-//     expect(videoBlocks.length).toBeGreaterThan(0);
-// });

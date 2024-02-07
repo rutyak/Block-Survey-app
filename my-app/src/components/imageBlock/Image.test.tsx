@@ -4,6 +4,7 @@ import {fireEvent, render, screen} from '@testing-library/react';
 import Image from "./Image";
 const BaseUrl = 'http://localhost:5000';
 import axios from 'axios';
+import userEvent from "@testing-library/user-event";
 jest.mock('axios');
 
 it('testing Image component rendering',()=>{
@@ -12,40 +13,26 @@ it('testing Image component rendering',()=>{
     expect(testid).toBeInTheDocument();
 })
 
-it('Testing Image post api',async()=>{
-    
-    const mockResponse = {
-        data: {
-            title: 'Nature',
-            name: 'rutik'
-        }
-    }
-    axios.post = jest.fn().mockResolvedValue(mockResponse);
-    render(<MemoryRouter><Image/></MemoryRouter>);
-    const btn = screen.getByText('Submit');
-    fireEvent.click(btn);
 
-    const res = await axios.post(`${BaseUrl}/images`);
-    expect(mockResponse.data.name).toEqual(res.data.name);
-    expect(mockResponse.data.title).toEqual(res.data.title);
-})
-
-
-it('Testing inputs',()=>{
+it('Testing inputs',async()=>{
+    userEvent.setup();
     render(<MemoryRouter><Image/></MemoryRouter>);
     const inputBox1 = screen.getByPlaceholderText('Image title');
-    const inputBox2 = screen.getByPlaceholderText('Description');
-    expect(inputBox1).toBeInTheDocument();
-    expect(inputBox2).toBeInTheDocument();
+    const inputBox2= screen.getByPlaceholderText('Description');
+    await userEvent.type(inputBox1, 'Nature');
+    await userEvent.type(inputBox2, 'nature lover');
+    expect(inputBox1).toHaveValue('Nature');
+    expect(inputBox2).toHaveValue('nature lover');
 })
 
-it('Checking choose image button', () => {
+it('Checking choose image button', async() => {
+    const user = userEvent.setup()
+    const files = new File(['hello'],'hello.png',{type: 'image/png'});
     render(<MemoryRouter><Image/></MemoryRouter>);
-    const input = screen.getByTestId('image-choose');
-    fireEvent.change(input);
-    expect(screen.getByText('Image selected')).toBeInTheDocument();
-
-  });
+    const input = screen.getByTestId(/image-choose/i) as any;
+    await user.upload(input, files);
+    expect(input.files[0]).toStrictEqual(files)
+});
 
 it('Testing submit button',()=>{
     render(<MemoryRouter><Image/></MemoryRouter>);

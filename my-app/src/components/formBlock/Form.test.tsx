@@ -3,6 +3,7 @@ import { MemoryRouter } from "react-router-dom";
 import { fireEvent, render, screen } from '@testing-library/react';
 import Form from "./Form";
 import axios from "axios";
+import userEvent from "@testing-library/user-event";
 const BaseUrl = 'http://loaclhost:5000';
 jest.mock('axios');
 
@@ -29,35 +30,51 @@ it('Teesting Form fetching api', async () => {
 })
 
 
-it('Testing Form inputs', () => {
+it('Testing Form inputs', async() => {
+    userEvent.setup();
     render(<MemoryRouter><Form /></MemoryRouter>);
     const inputBox1 = screen.getByPlaceholderText(/Add title/i);
     const inputBox2 = screen.getByPlaceholderText(/Add Description/i);
-    expect(inputBox1).toBeInTheDocument();
-    expect(inputBox2).toBeInTheDocument();
+    await userEvent.type(inputBox1, 'Nature')
+    await userEvent.type(inputBox2, 'Nature lover')
+    expect(inputBox1).toHaveValue('Nature');
+    expect(inputBox2).toHaveValue('Nature lover');
 })
 
 describe('Question Input testing', () => {
-    it('Testing single Question', () => {
+    it('Testing single Question', async() => {
+        userEvent.setup();
         render(<MemoryRouter><Form /></MemoryRouter>);
         const addButton = screen.getByTestId('Add question');
-        fireEvent.click(addButton);
-        expect(screen.getByPlaceholderText('Enter your question?')).toBeInTheDocument();
+        await userEvent.click(addButton);
+        const input = screen.getByPlaceholderText('Enter your question?');
+        await userEvent.type(input, 'I love travelling')
+        expect(input).toHaveValue('I love travelling');
     })
 
-    it('Testing Multiple Question', () => {
+    it('Testing Multiple Question', async() => {
+        userEvent.setup();
         render(<MemoryRouter><Form/></MemoryRouter>);
-
         const addMultiButton = screen.getByTestId('Add multi choice question');
-        fireEvent.click(addMultiButton);
-        expect(screen.getByPlaceholderText('Enter your question?')).toBeInTheDocument();
+        await userEvent.click(addMultiButton);
+        const input = screen.getByPlaceholderText('Enter your question?');
+        await userEvent.type(input, 'Music')
+        expect(input).toHaveValue('Music');
     })
 
-    it('Testing checkbox Question', () => {
+    it('Testing checkbox Question',async() => {
         render(<MemoryRouter><Form/></MemoryRouter>);
-
         const addCheckButton = screen.getByTestId('Add checkbox question');
-        fireEvent.click(addCheckButton);
-        expect(screen.getByPlaceholderText('Enter your question?')).toBeInTheDocument();
+        await userEvent.click(addCheckButton);
+        const input = screen.getByPlaceholderText('Enter your question?');
+        await userEvent.type(input, 'Nature')
+        expect(input).toHaveValue('Nature');
     }) 
+})
+
+it('Submit but onClick test ',async()=>{
+    render(<MemoryRouter><Form/></MemoryRouter>)
+    const btn = screen.getByTestId('form-submit');
+    await userEvent.click(btn);
+    expect(await screen.findByText('Please wait...')).toBeInTheDocument();
 })

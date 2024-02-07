@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 const BaseUrl = 'http://localhost:5000'
 
 
-const Video = () => {
+const VideoA = () => {
 
   const param = useParams();
   const videoId = param.videoId;
@@ -62,14 +62,14 @@ const Video = () => {
     answer: ansType[],
   }
 
-  const [videoA, setVideoA] = useState<videoAType[]>()
+  const [videoAns, setVideoAns] = useState<videoAType[]>()
 
   useEffect(() => {
     (async function fetch(){
       try {
         const res = await axios.get(`${BaseUrl}/videoAnsData`);
         if (res.data && res.data.data) {
-          setVideoA(res.data.data);
+          setVideoAns(res.data.data);
         } else {
           console.error("Invalid response structure:", res);
         }
@@ -79,7 +79,7 @@ const Video = () => {
     })()
   },[])
 
-  console.log("anaVideo", videoA)
+  console.log("anaVideo", videoAns)
 
 
   return (
@@ -91,7 +91,7 @@ const Video = () => {
         </div>
         <div className='video-res-container'>
           {
-            videoA?.map((video: videoAType, i: number) => (
+            videoAns?.map((video: videoAType, i: number) => (
               video.title.trim() === videoId?.trim() && name === video.name? (
                 <div key={i}>
                     <video ref={videoRef} width="550px" controls onLoadedData={() => handleAnswer(video.answer[0].start, video.answer[0].end)}>
@@ -99,7 +99,7 @@ const Video = () => {
                     </video>
                     <p>{video.name} Like The Video From {video.answer[0].start}s to {video.answer[0].end}s</p>
                 </div>
-              ) : ''
+              ) : null
             )
             )
           }
@@ -110,4 +110,4 @@ const Video = () => {
   )
 }
 
-export default Video
+export default VideoA

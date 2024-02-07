@@ -34,7 +34,7 @@ const Video = () => {
   });
 
 
-  const [file, setFile] = useState<any>()
+  const [file, setFile] = useState<File>()
   const [type, setType] = useState<string>('')
   const [disable, setDisable] = useState<boolean>(true);
 
@@ -48,13 +48,12 @@ const Video = () => {
     try {
       console.log("Video Submit clicked")
       const formData = new FormData();
-      formData.append('file', file);
+      formData.append('file', file as File);
       formData.append('title', titleDesc.title);
       formData.append('desc', titleDesc.desc);
       formData.append('type', "Video");
       formData.append('videoType', type);
       formData.append('stage', '');
-      formData.append('answer', JSON.stringify([]));
 
       try {
         const res = await axios.post(`${BaseUrl}/videos/upload`, formData)
@@ -71,7 +70,7 @@ const Video = () => {
       console.log(error);
     }
   }
-
+  console.log('file: ',file)
 
   return (
     <div className='videoContainer'>
@@ -94,7 +93,7 @@ const Video = () => {
           /><br />
 
           {file ? (
-            <video title='video-tag' width="320" height="240" controls>
+            <video width="320" height="240" controls>
               <source src={URL.createObjectURL(file)} type={`video/${type}`} />
             </video>
           ) : ''
@@ -104,6 +103,7 @@ const Video = () => {
               <label htmlFor="upload">Upload video:</label><br />
               <input
                 data-testid='video-choose'
+                id='upload'
                 type='file'
                 accept="video/*"
                 name='videoFile'

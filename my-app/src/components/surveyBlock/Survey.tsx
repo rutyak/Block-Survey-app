@@ -7,8 +7,6 @@ const BaseUrl = 'http://localhost:5000';
 
 const Survey = () => {
 
- 
-
   type questionType = {
     options: string[],
     question: string,
@@ -63,7 +61,8 @@ const Survey = () => {
       }
     })()
   }, [])
-
+  
+  console.log('Form: ',form)
 
 
   return (
@@ -72,10 +71,10 @@ const Survey = () => {
       <div className='survey-container' data-testid='survey-container'>
         <div className='formBlock'>
           <h2>Forms</h2>
-          <div className="fBlock">
+          <div className="fBlock" data-testid='fBlock'>
             {form?.map((form: any, i: number) => (
               <div className='formSurvey' key={i}>
-                <p>{form.title}<DrawerExample data={form} /> </p>
+                <p>{form.title}<DrawerExample data-testid='drawer' data={form} /> </p>
               </div>
             ))
             }
@@ -83,10 +82,10 @@ const Survey = () => {
         </div>
         <div className='videoBlock'>
           <h2>Videos</h2>
-          <div className="vBlock">
+          <div className="vBlock" data-testid='vBlock'>
             {video?.map((video: any, i: number) => (
               <div className='videoSurvey' key={i}>
-                <p>{video.title}<DrawerExample data={video} /></p>
+                <p>{video.title}<DrawerExample data-testid='drawer'  data={video} /></p>
               </div>
             ))}
           </div>
@@ -94,10 +93,10 @@ const Survey = () => {
         </div>
         <div className='imageBlock'>
           <h2>Images</h2>
-          <div className="iBlock">
+          <div className="iBlock" data-testid='iBlock'> 
             {image?.map((img: any, i: number) => (
-              <div className='imgSurvey' key={i}>
-                <p>{img.title}<DrawerExample data={img} /></p>
+              <div className='imgSurvey' key={i} data-testid='img-survey'>
+                <p>{img.title}<DrawerExample data-testid='drawer' data={img} /></p>
               </div>
             ))}
           </div>
