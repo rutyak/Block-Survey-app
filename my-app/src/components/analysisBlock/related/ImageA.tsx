@@ -57,12 +57,12 @@ const Image = () => {
             imageA?.map((img: imageType, i: number) => (
               img.title === imageId && name === img.name ? (
                 <div key={i} className="img-desc">
-                  <div className='img-section'>
+                  <div className='img-section' data-testid='user-image-res'>
                     <img src={img.answer[0].img1} alt="img1" />
                     <img src={img.answer[0].img2} alt="img1" />
                   </div>
                   <div>
-                    <p>{img.name} Like This Images</p>
+                    <p data-testid='user-img-res'>{img.name} Like This Images</p>
                   </div>
                 </div>
               ) : ''

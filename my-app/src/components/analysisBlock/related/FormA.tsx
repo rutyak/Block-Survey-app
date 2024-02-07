@@ -73,7 +73,7 @@ const Form = () => {
             formA?.map((form: formType, i: number) => (
               formId === form.title && name === form.name? (
                 form.answer?.map((survey: any, j: number)=>(
-                  <div key={i} >
+                  <div key={i} data-testid={`user-form-res-${j}`}>
                     <div className="ques-survey">
                       <div className="que-form">
                         <b>{survey.que ? j + 1. : ''} {survey.que}</b>

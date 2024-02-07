@@ -94,10 +94,10 @@ const VideoA = () => {
             videoAns?.map((video: videoAType, i: number) => (
               video.title.trim() === videoId?.trim() && name === video.name? (
                 <div key={i}>
-                    <video ref={videoRef} width="550px" controls onLoadedData={() => handleAnswer(video.answer[0].start, video.answer[0].end)}>
+                    <video data-testid='user-video-res' ref={videoRef} width="550px" controls onLoadedData={() => handleAnswer(video.answer[0].start, video.answer[0].end)}>
                       <source src={video.videoUrl} type={`video/${video.videoType}`} />
                     </video>
-                    <p>{video.name} Like The Video From {video.answer[0].start}s to {video.answer[0].end}s</p>
+                    <p data-testid='user-res'>{video.name} Like The Video From {video.answer[0].start}s to {video.answer[0].end}s</p>
                 </div>
               ) : null
             )
