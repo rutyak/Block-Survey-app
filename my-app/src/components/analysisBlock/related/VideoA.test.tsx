@@ -6,7 +6,7 @@ const BaseUrl = 'http://localhost:5000'
 jest.mock('axios');
 
 it('Checking Video component of analysis component', () => {
-  render(<MemoryRouter><VideoA /></MemoryRouter>);
+  render(<MemoryRouter><VideoA/></MemoryRouter>);
   const text = screen.getByText('User response on video!!');
   expect(text).toBeInTheDocument();
 })
@@ -35,13 +35,19 @@ describe('VideoA component', () => {
 
     const videoData = {
       data: [{
-        answer: [{ start: '12', end: '15', _id: '65c32e976b9ae4853445c671' }],
+        _id: "65c32e976b9ae4853445c670",
         name: "Ruti Khandekar",
         title: "Nature Lover",
-        videoType: "mp4",
+        answer: [
+            {
+                "start": "12",
+                "end": "15",
+                "_id": "65c32e976b9ae4853445c671"
+            }
+        ],
         videoUrl: "http://res.cloudinary.com/daguvaxyh/video/upload/v1706851244/Videos/ke9gqizgh01vfv7ymqyj.mp4",
-        _id: "65c32e976b9ae4853445c670"
-      }]
+        videoType: "mp4",
+    }]
     };
     axios.get = jest.fn().mockResolvedValue({data: videoData});
     
@@ -55,7 +61,11 @@ describe('VideoA component', () => {
 
     await waitFor(()=>{
         expect(screen.getByTestId('user-video-res')).toBeInTheDocument();
-        expect(screen.getByTestId('user-res')).toBeInTheDocument();
+        expect(screen.getByText(/ruti khandekar like the video from 12s to 15s/i)).toBeInTheDocument();
     })
   })
 });
+function querySelector(arg0: string): any {
+  throw new Error('Function not implemented.');
+}
+

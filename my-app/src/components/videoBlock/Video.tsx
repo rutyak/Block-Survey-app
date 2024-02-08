@@ -34,9 +34,8 @@ const Video = () => {
   });
 
 
-  const [file, setFile] = useState<File>()
+  const [file, setFile] = useState<File | undefined>()
   const [type, setType] = useState<string>('')
-  const [disable, setDisable] = useState<boolean>(true);
 
   function handleSurveyToggle() {
     setBtn({ ...btn, addVideoSurvey: true, createBtn: false });
@@ -92,13 +91,13 @@ const Video = () => {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitleDesc({ ...titleDesc, desc: e.target.value })}
           /><br />
 
-          {file ? (
-            <video width="320" height="240" controls>
+          {file? (
+            <video data-testid='video-upload' width="320" height="240" controls>
               <source src={URL.createObjectURL(file)} type={`video/${type}`} />
             </video>
           ) : ''
           }
-          {disable &&
+         
             <div>
               <label htmlFor="upload">Upload video:</label><br />
               <input
@@ -113,16 +112,14 @@ const Video = () => {
                   if (file && file.length > 0) {
                     console.log(file[0]);
                     setFile(file[0]);
-
                     let arr = (file[0].name).split('.');
                     console.log(arr[1]);
                     setType(arr[1]);
-                    setDisable(false);
                   }
                 }}
               />
             </div>
-          }<br />
+          <br />
           {selected ? <p style={{ color: '#755a5a', marginBottom: '0.5rem'}}>Video selected</p> : ''}
           <button data-testid='video-submit' onClick={handelSubmit}>Submit</button>
           {submitMes ? <p style={{ color: 'green', marginTop: '1rem' }}>Please wait...</p> : ''}
